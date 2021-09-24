@@ -1,17 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+
+const executionConditions = ["команда", "представление+кнопка", "inline-кнопка"]
+
+function CreateViewMain(props) {
+    const executionConditions = props.executionConditions;
+    const options = executionConditions.map((executionCondition) =>  <option key={executionCondition}>{executionCondition}</option>);
+    return (<div className="container">
+                <h1>Окно создания представлений</h1>
+                <div>
+                    <span>Выбрать условие выполнения:</span>
+                    <select>
+                        {options}
+                    </select>
+                </div>
+            </div>);
+}
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <CreateViewMain executionConditions={executionConditions}></CreateViewMain>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
