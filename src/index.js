@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+import {createBrowserHistory} from 'history'
 
 const executionConditions = [
     {title:"команда", value:'command-trigger'},
@@ -19,8 +19,19 @@ function Trigger(props) {
 }
 
 function CommandTrigger(props) {
+    const commands = ['/start'];
+    const commandsOptions = commands.map((command) =>
+            <option
+                key={command}
+                value={command}>
+                    {command}
+            </option>);
     return (<div>
                 <span>Выберите комманду:</span>
+                <select>
+                    {commandsOptions}
+                </select>
+                <button>Создать новую комманду</button>
             </div>)
 }
 
