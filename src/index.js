@@ -19,7 +19,6 @@ function Trigger(props) {
 }
 
 function CommandTrigger(props) {
-    const commands = ['/start']
     return (<div>
                 <span>Выберите комманду:</span>
             </div>)
@@ -27,7 +26,6 @@ function CommandTrigger(props) {
 
 
 function ViewTrigger(props) {
-    const commands = ['/start']
     return (<div>
                 <div>
                     <span>Выберите представление:</span>
@@ -45,6 +43,11 @@ class CreateViewMain extends React.Component {
     constructor(props) {
         super(props);
         this.state = {trigger: executionConditions[0].value}
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({trigger: event.target.value});
     }
 
     render() {
@@ -61,17 +64,17 @@ class CreateViewMain extends React.Component {
                 <h1>Окно создания представлений</h1>
                 <div>
                     <span>Выбрать условие выполнения:</span>
-                    <select>
+                    <select onChange={this.handleChange}>
                         {options}
                     </select>
                 </div>
-                <Trigger type={this.state.trigger}/>
+                <Trigger trigger={this.state.trigger}/>
             </div>);
     }
 }
 
 
 ReactDOM.render(
-  <CreateViewMain executionConditions={executionConditions}></CreateViewMain>,
+  <CreateViewMain executionConditions={executionConditions} />,
   document.getElementById('root')
 );
