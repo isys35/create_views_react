@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {createBrowserHistory} from 'history'
 
 const executionConditions = [
     {title:"команда", value:'command-trigger'},
@@ -11,29 +10,52 @@ const executionConditions = [
 
 function Trigger(props) {
     const trigger = props.trigger
-    if (trigger === 'command-trigger') {
-        return <CommandTrigger />
-    } else {
-        return <ViewTrigger />
-    }
+    const component = (trigger === 'command-trigger') ? <CommandTrigger /> : <ViewTrigger />
+    return component
 }
 
-function CommandTrigger(props) {
-    const commands = ['/start'];
-    const commandsOptions = commands.map((command) =>
+function CreateCommand(props) {
+    return (
+        <div>
+            <span>Создать комманду:</span>
+        </div>
+    )
+}
+
+
+function SelectCommand(props) {
+    return (<div>
+                <span>Выберите комманду:</span>
+                <select>
+                    {props.commandsOptions}
+                </select>
+                <button>Создать новую комманду</button>
+            </div>
+            )
+}
+
+
+class CommandTrigger extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {action: 'select'};
+    }
+    
+    render() {
+        const commands = ['/start']; // TODO: Получаем из api
+        const commandsOptions = commands.map((command) =>
             <option
                 key={command}
                 value={command}>
                     {command}
             </option>);
-    return (<div>
-                <span>Выберите комманду:</span>
-                <select>
-                    {commandsOptions}
-                </select>
-                <button>Создать новую комманду</button>
-            </div>)
+        const component = (this.state.action === 'select') ? <SelectCommand commandsOptions={commandsOptions}/> : <CreateCommand />
+        return (component)
+        
+    }
+
 }
+
 
 
 function ViewTrigger(props) {
