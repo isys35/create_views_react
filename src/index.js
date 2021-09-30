@@ -14,17 +14,36 @@ function Trigger(props) {
     return component
 }
 
-function CreateCommand(props) {
-    return (
-        <div>
-            <span>Создать комманду:</span>
-            <input type="text"/>
-            <button>Сохранить</button>
-            <button onClick={props.handleCancelCreate}>Отмена</button>
-        </div>
-    )
-}
 
+class CreateCommand extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: '/'};
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value})
+    }
+
+    handleSubmit() {
+        this.props.handleSubmitCreate(this.state.value);
+    }
+
+    render() {
+        return (
+            <div>
+                <form onSubmit={this.props.handleSubmitCreate}>
+                    <span>Создать комманду:</span>
+                    <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                    <input type="submit" value="Сохранить"/>
+                    <button onClick={this.props.handleCancelCreate}>Отмена</button>
+                </form>
+            </div>
+        )
+    }
+
+}
 
 function SelectCommand(props) {
     return (<div>
