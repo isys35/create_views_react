@@ -18,6 +18,9 @@ function CreateCommand(props) {
     return (
         <div>
             <span>Создать комманду:</span>
+            <input type="text"/>
+            <button>Сохранить</button>
+            <button onClick={props.handleCancelCreate}>Отмена</button>
         </div>
     )
 }
@@ -29,7 +32,7 @@ function SelectCommand(props) {
                 <select>
                     {props.commandsOptions}
                 </select>
-                <button>Создать новую комманду</button>
+                <button onClick={props.handleCreate}>Создать новую комманду</button>
             </div>
             )
 }
@@ -39,6 +42,16 @@ class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
         this.state = {action: 'select'};
+        this.handleCreate = this.handleCreate.bind(this);
+        this.handleCancelCreate = this.handleCancelCreate.bind(this);
+    }
+
+    handleCreate() {
+        this.setState({action: 'create'});
+    }
+
+    handleCancelCreate() {
+        this.setState({action: 'select'});
     }
     
     render() {
@@ -49,7 +62,10 @@ class CommandTrigger extends React.Component {
                 value={command}>
                     {command}
             </option>);
-        const component = (this.state.action === 'select') ? <SelectCommand commandsOptions={commandsOptions}/> : <CreateCommand />
+        const component = (this.state.action === 'select')
+                                                            ? <SelectCommand commandsOptions={commandsOptions}
+                                                                            handleCreate={this.handleCreate}/>
+                                                            : <CreateCommand handleCancelCreate={this.handleCancelCreate} />
         return (component)
         
     }
