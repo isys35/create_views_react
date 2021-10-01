@@ -20,6 +20,7 @@ class CreateCommand extends React.Component {
         super(props);
         this.state = {value: '/'};
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -33,12 +34,10 @@ class CreateCommand extends React.Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.props.handleSubmitCreate}>
-                    <span>Создать комманду:</span>
-                    <input type="text" value={this.state.value} onChange={this.handleChange}/>
-                    <input type="submit" value="Сохранить"/>
-                    <button onClick={this.props.handleCancelCreate}>Отмена</button>
-                </form>
+                <span>Создать комманду:</span>
+                <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                <button onClick={this.handleSubmit}>Сохранить</button>
+                <button onClick={this.props.handleCancelCreate}>Отмена</button>
             </div>
         )
     }
@@ -60,9 +59,10 @@ function SelectCommand(props) {
 class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {action: 'select'};
+        this.state = {action: 'select', commands: ['/start']};
         this.handleCreate = this.handleCreate.bind(this);
         this.handleCancelCreate = this.handleCancelCreate.bind(this);
+        this.handleSubmitCreate = this.handleSubmitCreate.bind(this);
     }
 
     handleCreate() {
@@ -73,8 +73,15 @@ class CommandTrigger extends React.Component {
         this.setState({action: 'select'});
     }
     
+    handleSubmitCreate(value) {
+        this.setState({action: 'select'});
+        this.setState({
+            commands: [...this.state.commands, value]
+        });
+    }
+    
     render() {
-        const commands = ['/start']; // TODO: Получаем из api
+        const commands = this.state.commands; // TODO: Получаем из api
         const commandsOptions = commands.map((command) =>
             <option
                 key={command}
@@ -84,7 +91,8 @@ class CommandTrigger extends React.Component {
         const component = (this.state.action === 'select')
                                                             ? <SelectCommand commandsOptions={commandsOptions}
                                                                             handleCreate={this.handleCreate}/>
-                                                            : <CreateCommand handleCancelCreate={this.handleCancelCreate} />
+                                                            : <CreateCommand handleCancelCreate={this.handleCancelCreate}
+                                                                             handleSubmitCreate={this.handleSubmitCreate}/>
         return (component)
         
     }
