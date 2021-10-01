@@ -55,6 +55,13 @@ function SelectCommand(props) {
             )
 }
 
+function TextView(props) {
+    return (
+        <textarea>
+            
+        </textarea>
+    )
+}
 
 class CommandTrigger extends React.Component {
     constructor(props) {
@@ -145,6 +152,7 @@ class CreateViewMain extends React.Component {
                     </select>
                 </div>
                 <Trigger trigger={this.state.trigger}/>
+                <TextView />
             </div>);
     }
 }
