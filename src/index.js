@@ -121,23 +121,60 @@ function ViewTrigger(props) {
 }
 
 
-function ButtonView(props) {
-    const buttons = ['ReplyKeyboard', 'InlineKeyboard']
-    const options = buttons.map((button) =>
+class ButtonsField extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+
+    render() {
+        const buttons = this.props.buttons.map((button) =>
+            <p><span key={button}>{button}</span></p>);
+        return (
+            <div>
+                {buttons}
+            </div>
+        )
+    }
+
+}
+
+
+class ButtonView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {buttons: []};
+        this.addButton = this.addButton.bind(this);
+    }
+
+    addButton() {
+        this.setState({
+            buttons: [...this.state.buttons, 'Кнопка']
+        });
+    }
+    
+    render() {
+        const buttons = ['ReplyKeyboard', 'InlineKeyboard'];
+        const options = buttons.map((button) =>
             <option
                 key={button}
                 value={button}>
                     {button}
             </option>);
-    return (
-        <div>
-            <span>Тип кнопок:</span>
-            <select>
-                {options}
-            </select>
-        </div>
-        
+        return (
+            <div>
+                <span>Тип кнопок:</span>
+                <select>
+                    {options}
+                </select>
+                <button onClick={this.addButton}>Добавить кнопку</button>
+                <div>
+                    <span>Кнопки:</span>
+                    <ButtonsField buttons={this.state.buttons}/>
+                </div>
+            </div>
     )
+    }
 }
 
 
@@ -175,7 +212,7 @@ class CreateViewMain extends React.Component {
                 </div>
                 <Trigger trigger={this.state.trigger}/>
                 <TextView />
-                <ButtonView />
+                <ButtonView buttonsField={<ButtonsField />}/>
             </div>);
     }
 }
