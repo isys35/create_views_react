@@ -57,11 +57,12 @@ function SelectCommand(props) {
             )
 }
 
+
 function TextView(props) {
     return (
-        <textarea>
-            
-        </textarea>
+        <div>
+            <textarea></textarea>
+        </div>
     )
 }
 
