@@ -121,6 +121,25 @@ function ViewTrigger(props) {
 }
 
 
+function ButtonView(props) {
+    const buttons = ['ReplyKeyboard', 'InlineKeyboard']
+    const options = buttons.map((button) =>
+            <option
+                key={button}
+                value={button}>
+                    {button}
+            </option>);
+    return (
+        <div>
+            <span>Тип кнопок:</span>
+            <select>
+                {options}
+            </select>
+        </div>
+        
+    )
+}
+
 
 
 
@@ -156,6 +175,7 @@ class CreateViewMain extends React.Component {
                 </div>
                 <Trigger trigger={this.state.trigger}/>
                 <TextView />
+                <ButtonView />
             </div>);
     }
 }
