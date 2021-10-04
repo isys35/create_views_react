@@ -48,7 +48,7 @@ class CreateCommand extends React.Component {
 
 function SelectCommand(props) {
     return (<div>
-                <span>Выберите комманду:</span>
+                <span>Комманда:</span>
                 <select>
                     {props.commandsOptions}
                 </select>
@@ -114,7 +114,7 @@ class CommandTrigger extends React.Component {
 function ViewTrigger(props) {
     return (<div>
                 <div>
-                    <span>Выберите представление:</span>
+                    <span>Представление:</span>
                 </div>
             </div>
     )
@@ -168,7 +168,7 @@ class CreateViewMain extends React.Component {
             <div className="container">
                 <h1>Окно создания представлений</h1>
                 <div>
-                    <span>Выбрать условие выполнения:</span>
+                    <span>Условие выполнения:</span>
                     <select onChange={this.handleChange}>
                         {options}
                     </select>
