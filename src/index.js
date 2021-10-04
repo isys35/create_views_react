@@ -34,10 +34,12 @@ class CreateCommand extends React.Component {
     render() {
         return (
             <div>
-                <span>Создать комманду:</span>
-                <input type="text" value={this.state.value} onChange={this.handleChange}/>
-                <button onClick={this.handleSubmit}>Сохранить</button>
-                <button onClick={this.props.handleCancelCreate}>Отмена</button>
+                <form onSubmit={this.handleSubmit}>
+                    <span>Создать комманду:</span>
+                    <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                    <input type="submit" value="Сохранить"/>
+                    <button onClick={this.props.handleCancelCreate}>Отмена</button>
+                </form>
             </div>
         )
     }
