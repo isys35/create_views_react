@@ -7,6 +7,40 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  text-align: center;
+}
+
+.create-view {
+  width: 400px;
+  margin: auto;
+}
+
+.row-select {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  display: inline-block;
+  width: 250px;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+}
+
+.button-view {
+  height: 40px;
+  text-align: center;
+}
+
+.save-button {
+  display: flex;
+  justify-content: right;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

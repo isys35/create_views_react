@@ -35,7 +35,7 @@ class CreateCommand extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <span>Создать комманду:</span>
+                    <span className="title">Создать комманду:</span>
                     <input type="text" value={this.state.value} onChange={this.handleChange}/>
                     <input type="submit" value="Сохранить"/>
                     <button onClick={this.props.handleCancelCreate}>Отмена</button>
@@ -47,12 +47,14 @@ class CreateCommand extends React.Component {
 }
 
 function SelectCommand(props) {
-    return (<div>
-                <span>Комманда:</span>
-                <select>
-                    {props.commandsOptions}
-                </select>
-                <button onClick={props.handleCreate}>Создать новую комманду</button>
+    return (<div className="row-select">
+                <span className="title">Комманда:</span>
+                <div>
+                    <select>
+                        {props.commandsOptions}
+                    </select>
+                    <button onClick={props.handleCreate}>+</button>
+                </div>
             </div>
             )
 }
@@ -113,7 +115,7 @@ class CommandTrigger extends React.Component {
 
 function ViewTrigger(props) {
     return (<div>
-                <div>
+                <div className="row-select">
                     <span>Представление:</span>
                 </div>
             </div>
@@ -129,7 +131,7 @@ class ButtonsField extends React.Component {
 
     render() {
         const buttons = this.props.buttons.map((button) =>
-            <p><span key={button}>{button}</span></p>);
+            <div className="button-view"><span key={button}>{button}</span></div>);
         return (
             <div>
                 {buttons}
@@ -163,13 +165,17 @@ class ButtonView extends React.Component {
             </option>);
         return (
             <div>
-                <span>Тип кнопок:</span>
-                <select>
-                    {options}
-                </select>
-                <button onClick={this.addButton}>Добавить кнопку</button>
+                <div className="row-select">
+                    <span className="title">Тип кнопок:</span>
+                    <div>
+                        <select>
+                            {options}
+                        </select>
+                        <button onClick={this.addButton}>+</button>
+                    </div>
+                </div>
                 <div>
-                    <span>Кнопки:</span>
+                    <span className="title">Кнопки:</span>
                     <ButtonsField buttons={this.state.buttons}/>
                 </div>
             </div>
@@ -203,16 +209,21 @@ class CreateViewMain extends React.Component {
         return (
 
             <div className="container">
-                <h1>Окно создания представлений</h1>
-                <div>
-                    <span>Условие выполнения:</span>
-                    <select onChange={this.handleChange}>
-                        {options}
-                    </select>
+                <h1>Cоздание представления</h1>
+                <div className="create-view">
+                    <div className="row-select">
+                        <span className="title">Условие выполнения:</span>
+                        <select onChange={this.handleChange}>
+                            {options}
+                        </select>
+                    </div>
+                    <Trigger trigger={this.state.trigger}/>
+                    <TextView />
+                    <ButtonView buttonsField={<ButtonsField />}/>
+                    <div className="save-button">
+                        <button>Сохранить</button>
+                    </div>
                 </div>
-                <Trigger trigger={this.state.trigger}/>
-                <TextView />
-                <ButtonView buttonsField={<ButtonsField />}/>
             </div>);
     }
 }
