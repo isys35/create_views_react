@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
+const HOST = 'http://127.0.0.1:8000/'
+
 const executionConditions = [
     {title:"команда", value:'command-trigger'},
     {title:"представление", value:'view-trigger'},
@@ -71,11 +74,25 @@ function TextView(props) {
 class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {action: 'select', commands: ['/start']};
+        this.state = {action: 'select', commands: []};
         this.handleCreate = this.handleCreate.bind(this);
         this.handleCancelCreate = this.handleCancelCreate.bind(this);
         this.handleSubmitCreate = this.handleSubmitCreate.bind(this);
     }
+
+    componentDidMount() {
+        fetch(HOST + 'commands')
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({
+                        commands: result.map(item => item.value)
+                            });
+                        }
+                    )
+
+    }
+
 
     handleCreate() {
         this.setState({action: 'create'});
