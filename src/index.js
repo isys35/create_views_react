@@ -49,14 +49,20 @@ class CreateCommand extends React.Component {
 
 }
 
+
+function CommandOptions(props) {
+    return (<select>
+                {props.options}
+            </select>)
+}
+
+
 function SelectCommand(props) {
     return (<div className="row-select">
                 <span className="title">Комманда:</span>
                 <div>
-                    <select>
-                        {props.commandsOptions}
-                    </select>
-                    <button onClick={props.handleCreate}>+</button>
+                    <CommandOptions options={props.commandsOptions} />
+                    <button onClick={props.handleCreate}>🛠️</button>
                 </div>
             </div>
             )
