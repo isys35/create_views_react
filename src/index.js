@@ -50,19 +50,44 @@ class CreateCommand extends React.Component {
 }
 
 
-function CommandOptions(props) {
-    return (<select>
-                {props.options}
-            </select>)
-}
+class CommandOptions extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {options: [<option>/start</option>]}
+    }
 
+    componentDidMount() {
+        fetch(HOST + 'commands')
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({
+                        options: result.map((item) =>   <option
+                                                            key={item.value}
+                                                            value={item.value}>
+                                                            {item.value}
+                                                        </option>)
+                            });
+                        }
+                    )
+
+    }
+
+    render() {
+        return (<select>
+                    {this.state.options}
+                </select>)
+    }
+}
+    
 
 function SelectCommand(props) {
     return (<div className="row-select">
                 <span className="title">Комманда:</span>
                 <div>
-                    <CommandOptions options={props.commandsOptions} />
-                    <button onClick={props.handleCreate}>🛠️</button>
+                    <CommandOptions />
+                    <button>🛠️</button>
                 </div>
             </div>
             )
@@ -80,59 +105,69 @@ function TextView(props) {
 class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {action: 'select', commands: []};
-        this.handleCreate = this.handleCreate.bind(this);
-        this.handleCancelCreate = this.handleCancelCreate.bind(this);
-        this.handleSubmitCreate = this.handleSubmitCreate.bind(this);
     }
-
-    componentDidMount() {
-        fetch(HOST + 'commands')
-            .then(res => res.json())
-                .then(
-                    (result) => {
-                        this.setState({
-                        commands: result.map(item => item.value)
-                            });
-                        }
-                    )
-
-    }
-
-
-    handleCreate() {
-        this.setState({action: 'create'});
-    }
-
-    handleCancelCreate() {
-        this.setState({action: 'select'});
-    }
-    
-    handleSubmitCreate(value) {
-        this.setState({action: 'select'});
-        this.setState({
-            commands: [...this.state.commands, value]
-        });
-    }
-    
     render() {
-        const commands = this.state.commands; // TODO: Получаем из api
-        const commandsOptions = commands.map((command) =>
-            <option
-                key={command}
-                value={command}>
-                    {command}
-            </option>);
-        const component = (this.state.action === 'select')
-                                                            ? <SelectCommand commandsOptions={commandsOptions}
-                                                                            handleCreate={this.handleCreate}/>
-                                                            : <CreateCommand handleCancelCreate={this.handleCancelCreate}
-                                                                             handleSubmitCreate={this.handleSubmitCreate}/>
-        return (component)
-        
+        return (<SelectCommand />)
     }
 
 }
+
+// class CommandTrigger extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {action: 'select', commands: []};
+//         this.handleCreate = this.handleCreate.bind(this);
+//         this.handleCancelCreate = this.handleCancelCreate.bind(this);
+//         this.handleSubmitCreate = this.handleSubmitCreate.bind(this);
+//     }
+//
+//     componentDidMount() {
+//         fetch(HOST + 'commands')
+//             .then(res => res.json())
+//                 .then(
+//                     (result) => {
+//                         this.setState({
+//                         commands: result.map(item => item.value)
+//                             });
+//                         }
+//                     )
+//
+//     }
+//
+//
+//     handleCreate() {
+//         this.setState({action: 'create'});
+//     }
+//
+//     handleCancelCreate() {
+//         this.setState({action: 'select'});
+//     }
+//    
+//     handleSubmitCreate(value) {
+//         this.setState({action: 'select'});
+//         this.setState({
+//             commands: [...this.state.commands, value]
+//         });
+//     }
+//    
+//     render() {
+//         const commands = this.state.commands; // TODO: Получаем из api
+//         const commandsOptions = commands.map((command) =>
+//             <option
+//                 key={command}
+//                 value={command}>
+//                     {command}
+//             </option>);
+//         const component = (this.state.action === 'select')
+//                                                             ? <SelectCommand commandsOptions={commandsOptions}
+//                                                                             handleCreate={this.handleCreate}/>
+//                                                             : <CreateCommand handleCancelCreate={this.handleCancelCreate}
+//                                                                              handleSubmitCreate={this.handleSubmitCreate}/>
+//         return (component)
+//        
+//     }
+//
+// }
 
 
 
