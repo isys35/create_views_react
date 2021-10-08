@@ -93,6 +93,20 @@ function SelectCommand(props) {
             )
 }
 
+function ChangeCommands(props) {
+    return (<div className="row-select">
+                <span className="title">Редактировать комманды:</span>
+                <div>
+                    <CommandOptions />
+                    <button>DEL</button>
+                    <button>CHNG</button>
+                    <button>CNCL</button>
+                    <button>add</button>
+                </div>
+            </div>
+            )
+}
+
 
 function TextView(props) {
     return (
@@ -105,9 +119,10 @@ function TextView(props) {
 class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {action: 'select'};
     }
     render() {
-        return (<SelectCommand />)
+        return (this.state.action === 'select') ? <SelectCommand /> : <SelectCommand />
     }
 
 }
