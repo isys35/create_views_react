@@ -87,7 +87,7 @@ function SelectCommand(props) {
                 <span className="title">Комманда:</span>
                 <div>
                     <CommandOptions />
-                    <button>🛠️</button>
+                    <button onClick={props.handleChange}>🛠️</button>
                 </div>
             </div>
             )
@@ -98,10 +98,10 @@ function ChangeCommands(props) {
                 <span className="title">Редактировать комманды:</span>
                 <div>
                     <CommandOptions />
-                    <button>DEL</button>
-                    <button>CHNG</button>
-                    <button>CNCL</button>
-                    <button>add</button>
+                    <button>🗑️</button>
+                    <button>✏️</button>
+                    <button onClick={props.handleCancelChange}>❌</button>
+                    <button>➕</button>
                 </div>
             </div>
             )
@@ -120,9 +120,22 @@ class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
         this.state = {action: 'select'};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleCancelChange = this.handleCancelChange.bind(this);
     }
+    
+    handleChange() {
+        this.setState({action: 'change'});
+    }
+
+    handleCancelChange() {
+        this.setState({action: 'select'});
+    }
+    
     render() {
-        return (this.state.action === 'select') ? <SelectCommand /> : <SelectCommand />
+        return (this.state.action === 'select') ?
+            <SelectCommand handleChange={this.handleChange} /> :
+            <ChangeCommands handleCancelChange={this.handleCancelChange} />
     }
 
 }
