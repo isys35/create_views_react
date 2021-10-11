@@ -122,6 +122,7 @@ class DeleteCommand extends React.Component {
     constructor(props) {
         super(props);
         this.state = {commandName: null};
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -135,12 +136,23 @@ class DeleteCommand extends React.Component {
                     )
     }
 
+    handleDelete() {
+        const url = `${HOST}commands/${this.props.commandId}`;
+        fetch(url, {method: 'DELETE'})
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.props.cancelDelete();
+                        }
+                    )
+    }
+
     render() {
         return (
             <div className="row-select">
                 <span className="title">Удалить комманду "{this.state.commandName}" ?</span>
                 <div>
-                    <button>✅</button>
+                    <button onClick={this.handleDelete}>✅</button>
                     <button onClick={this.props.cancelDelete}>❎</button>
                 </div>
             </div>
@@ -210,19 +222,7 @@ class CommandTrigger extends React.Component {
         this.state = {action: 'select', selectedCommandId: null, selectedCommandName: null};
         this.handleChange = this.handleChange.bind(this);
         this.handleCancelChange = this.handleCancelChange.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
         this.setSelectedCommand = this.setSelectedCommand.bind(this);
-    }
-
-    handleDelete() {
-        const url = `${HOST}commands/${this.state.selectedCommandId}`;
-        fetch(url, {method: 'DELETE'})
-            .then(res => res.json())
-                .then(
-                    (result) => {
-                        this.handleCancelChange();
-                        }
-                    )
     }
 
     setSelectedCommand(commandId) {
