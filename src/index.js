@@ -109,7 +109,7 @@ function MainMenuChange(props) {
                 <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
                 {/*<button onClick={props.handleDelete}>🗑️</button>*/}
                 <button onClick={props.handleDelete}>🗑️</button>
-                <button>✏️</button>
+                <button onClick={props.handleEdit}>✏️</button>
                 <button>➕</button>
                 <button onClick={props.handleCancelChange}>❌</button>
             </div>
@@ -153,7 +153,65 @@ class DeleteCommand extends React.Component {
                 <span className="title">Удалить комманду "{this.state.commandName}" ?</span>
                 <div>
                     <button onClick={this.handleDelete}>✅</button>
-                    <button onClick={this.props.cancelDelete}>❎</button>
+                    <button onClick={this.props.handleCancel}>❎</button>
+                </div>
+            </div>
+        )
+    }
+
+}
+
+class EditCommand extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {commandName: ''};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSaveChange = this.handleSaveChange.bind(this);
+
+    }
+
+    componentDidMount() {
+        const url = `${HOST}commands/${this.props.commandId}`
+        fetch(url)
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({commandName: result.value});
+                        }
+                    )
+    }
+
+    handleChange(event) {
+        this.setState({commandName: event.target.value});
+    }
+
+    handleSaveChange() {
+        const url = `${HOST}commands/${this.props.commandId}`
+        fetch(url,
+            {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    value: this.state.commandName
+                    }),
+                headers: {"Content-type": "application/json; charset=UTF-8"}})
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.props.handleCancel();
+                        }
+                    )
+    }
+
+
+
+    render() {
+        return (
+            <div className="row-select">
+                <span className="title">Изменить комманду:</span>
+                <div>
+                    <input type="text" value={this.state.commandName} onChange={this.handleChange}/>
+                    <button onClick={this.handleSaveChange}>💾</button>
+                    <button onClick={this.props.handleCancel}>❎</button>
                 </div>
             </div>
         )
@@ -162,20 +220,26 @@ class DeleteCommand extends React.Component {
 }
 
 
+
 class ChangeCommands extends React.Component {
     constructor(props) {
         super(props);
         this.state = {action: 'main'};
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleCancelDelete = this.handleCancelDelete.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
 
     handleDelete() {
         this.setState({action: 'delete'});
     }
 
-    handleCancelDelete() {
+    handleCancel() {
         this.setState({action: 'main'});
+    }
+    
+    handleEdit() {
+        this.setState({action: 'edit'});
     }
 
     render() {
@@ -184,28 +248,20 @@ class ChangeCommands extends React.Component {
                 setSelectedCommand={this.props.setSelectedCommand}
                 handleDelete={this.handleDelete}
                 handleCancelChange={this.props.handleCancelChange}
-            /> :
+                handleEdit = {this.handleEdit}
+            /> : (this.state.action === 'delete') ?
                 <DeleteCommand
                     commandId={this.props.commandId}
-                    cancelDelete={this.handleCancelDelete}
-                />
+                    handleCancel={this.handleCancel}
+                /> :
+                    <EditCommand
+                        commandId={this.props.commandId}
+                        handleCancel={this.handleCancel}
+                    />
         return component
     }
 }
 
-// function ChangeCommands(props) {
-//     return (<div className="row-select">
-//                 <span className="title">Редактировать комманды:</span>
-//                 <div>
-//                     <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
-//                     <button onClick={props.handleDelete}>🗑️</button>
-//                     <button>✏️</button>
-//                     <button>➕</button>
-//                     <button onClick={props.handleCancelChange}>❌</button>
-//                 </div>
-//             </div>
-//             )
-// }
 
 
 function TextView(props) {
