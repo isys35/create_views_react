@@ -54,7 +54,12 @@ class CommandOptions extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {options: [<option>/start</option>]}
+        this.state = {options: [], selectedId: null};
+        this.handleChangeSelectedCommand = this.handleChangeSelectedCommand.bind(this);
+    }
+    
+    handleChangeSelectedCommand(e) {
+        this.props.setSelectedCommand(e.target.value);
     }
 
     componentDidMount() {
@@ -62,20 +67,22 @@ class CommandOptions extends React.Component {
             .then(res => res.json())
                 .then(
                     (result) => {
+                        this.props.setSelectedCommand(result[0].id);
                         this.setState({
                         options: result.map((item) =>   <option
-                                                            key={item.value}
-                                                            value={item.value}>
+                                                            key={item.id}
+                                                            value={item.id}>
                                                             {item.value}
                                                         </option>)
                             });
                         }
                     )
 
+
     }
 
     render() {
-        return (<select>
+        return (<select onChange={this.handleChangeSelectedCommand}>
                     {this.state.options}
                 </select>)
     }
@@ -86,7 +93,7 @@ function SelectCommand(props) {
     return (<div className="row-select">
                 <span className="title">Комманда:</span>
                 <div>
-                    <CommandOptions />
+                    <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
                     <button onClick={props.handleChange}>🛠️</button>
                 </div>
             </div>
@@ -97,11 +104,11 @@ function ChangeCommands(props) {
     return (<div className="row-select">
                 <span className="title">Редактировать комманды:</span>
                 <div>
-                    <CommandOptions />
-                    <button>🗑️</button>
+                    <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
+                    <button onClick={props.handleDelete}>🗑️</button>
                     <button>✏️</button>
-                    <button onClick={props.handleCancelChange}>❌</button>
                     <button>➕</button>
+                    <button onClick={props.handleCancelChange}>❌</button>
                 </div>
             </div>
             )
@@ -119,9 +126,19 @@ function TextView(props) {
 class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {action: 'select'};
+        this.state = {action: 'select', selectedCommandId: null};
         this.handleChange = this.handleChange.bind(this);
         this.handleCancelChange = this.handleCancelChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.setSelectedCommand = this.setSelectedCommand.bind(this);
+    }
+
+    handleDelete() {
+        console.log(this.state.selectedCommandId);
+    }
+
+    setSelectedCommand(commandId) {
+        this.setState({selectedCommandId: commandId});
     }
     
     handleChange() {
@@ -134,68 +151,17 @@ class CommandTrigger extends React.Component {
     
     render() {
         return (this.state.action === 'select') ?
-            <SelectCommand handleChange={this.handleChange} /> :
-            <ChangeCommands handleCancelChange={this.handleCancelChange} />
+            <SelectCommand
+                handleChange={this.handleChange}
+                setSelectedCommand={this.setSelectedCommand}/> :
+            <ChangeCommands
+                handleCancelChange={this.handleCancelChange}
+                handleDelete={this.handleDelete}
+                setSelectedCommand={this.setSelectedCommand}
+            />
     }
 
 }
-
-// class CommandTrigger extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {action: 'select', commands: []};
-//         this.handleCreate = this.handleCreate.bind(this);
-//         this.handleCancelCreate = this.handleCancelCreate.bind(this);
-//         this.handleSubmitCreate = this.handleSubmitCreate.bind(this);
-//     }
-//
-//     componentDidMount() {
-//         fetch(HOST + 'commands')
-//             .then(res => res.json())
-//                 .then(
-//                     (result) => {
-//                         this.setState({
-//                         commands: result.map(item => item.value)
-//                             });
-//                         }
-//                     )
-//
-//     }
-//
-//
-//     handleCreate() {
-//         this.setState({action: 'create'});
-//     }
-//
-//     handleCancelCreate() {
-//         this.setState({action: 'select'});
-//     }
-//    
-//     handleSubmitCreate(value) {
-//         this.setState({action: 'select'});
-//         this.setState({
-//             commands: [...this.state.commands, value]
-//         });
-//     }
-//    
-//     render() {
-//         const commands = this.state.commands; // TODO: Получаем из api
-//         const commandsOptions = commands.map((command) =>
-//             <option
-//                 key={command}
-//                 value={command}>
-//                     {command}
-//             </option>);
-//         const component = (this.state.action === 'select')
-//                                                             ? <SelectCommand commandsOptions={commandsOptions}
-//                                                                             handleCreate={this.handleCreate}/>
-//                                                             : <CreateCommand handleCancelCreate={this.handleCancelCreate}
-//                                                                              handleSubmitCreate={this.handleSubmitCreate}/>
-//         return (component)
-//        
-//     }
-//
-// }
 
 
 
