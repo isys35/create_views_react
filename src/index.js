@@ -134,7 +134,14 @@ class CommandTrigger extends React.Component {
     }
 
     handleDelete() {
-        console.log(this.state.selectedCommandId);
+        const url = `${HOST}commands/${this.state.selectedCommandId}`;
+        fetch(url, {method: 'DELETE'})
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.handleCancelChange();
+                        }
+                    )
     }
 
     setSelectedCommand(commandId) {
