@@ -67,7 +67,7 @@ class CommandOptions extends React.Component {
             .then(res => res.json())
                 .then(
                     (result) => {
-                        this.props.setSelectedCommand(result[0].id);
+                        this.props.setSelectedCommand(result[0].id, result[0].value);
                         this.setState({
                         options: result.map((item) =>   <option
                                                             key={item.id}
@@ -107,6 +107,7 @@ function MainMenuChange(props) {
             <span className="title">Редактировать комманды:</span>
             <div>
                 <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
+                {/*<button onClick={props.handleDelete}>🗑️</button>*/}
                 <button onClick={props.handleDelete}>🗑️</button>
                 <button>✏️</button>
                 <button>➕</button>
@@ -117,23 +118,65 @@ function MainMenuChange(props) {
 }
 
 
+class DeleteCommand extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {commandName: null};
+    }
+
+    componentDidMount() {
+        const url = `${HOST}commands/${this.props.commandId}`
+        fetch(url)
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({commandName: result.value});
+                        }
+                    )
+    }
+
+    render() {
+        return (
+            <div className="row-select">
+                <span className="title">Удалить комманду "{this.state.commandName}" ?</span>
+                <div>
+                    <button>✅</button>
+                    <button onClick={this.props.cancelDelete}>❎</button>
+                </div>
+            </div>
+        )
+    }
+
+}
+
+
 class ChangeCommands extends React.Component {
     constructor(props) {
         super(props);
         this.state = {action: 'main'};
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleCancelDelete = this.handleCancelDelete.bind(this);
     }
+
+    handleDelete() {
+        this.setState({action: 'delete'});
+    }
+
+    handleCancelDelete() {
+        this.setState({action: 'main'});
+    }
+
     render() {
         const component = (this.state.action === 'main') ?
             <MainMenuChange
                 setSelectedCommand={this.props.setSelectedCommand}
-                handleDelete={this.props.handleDelete}
+                handleDelete={this.handleDelete}
                 handleCancelChange={this.props.handleCancelChange}
             /> :
-            <MainMenuChange
-                setSelectedCommand={this.props.setSelectedCommand}
-                handleDelete={this.props.handleDelete}
-                handleCancelChange={this.props.handleCancelChange}
-            />
+                <DeleteCommand
+                    commandId={this.props.commandId}
+                    cancelDelete={this.handleCancelDelete}
+                />
         return component
     }
 }
@@ -164,7 +207,7 @@ function TextView(props) {
 class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {action: 'select', selectedCommandId: null};
+        this.state = {action: 'select', selectedCommandId: null, selectedCommandName: null};
         this.handleChange = this.handleChange.bind(this);
         this.handleCancelChange = this.handleCancelChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -183,7 +226,11 @@ class CommandTrigger extends React.Component {
     }
 
     setSelectedCommand(commandId) {
-        this.setState({selectedCommandId: commandId});
+        this.setState(
+            {
+                selectedCommandId: commandId,
+            }
+        );
     }
     
     handleChange() {
@@ -203,6 +250,7 @@ class CommandTrigger extends React.Component {
                 handleCancelChange={this.handleCancelChange}
                 handleDelete={this.handleDelete}
                 setSelectedCommand={this.setSelectedCommand}
+                commandId={this.state.selectedCommandId}
             />
     }
 
