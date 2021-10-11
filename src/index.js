@@ -100,19 +100,57 @@ function SelectCommand(props) {
             )
 }
 
-function ChangeCommands(props) {
-    return (<div className="row-select">
-                <span className="title">Редактировать комманды:</span>
-                <div>
-                    <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
-                    <button onClick={props.handleDelete}>🗑️</button>
-                    <button>✏️</button>
-                    <button>➕</button>
-                    <button onClick={props.handleCancelChange}>❌</button>
-                </div>
+
+function MainMenuChange(props) {
+    return (
+        <div className="row-select">
+            <span className="title">Редактировать комманды:</span>
+            <div>
+                <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
+                <button onClick={props.handleDelete}>🗑️</button>
+                <button>✏️</button>
+                <button>➕</button>
+                <button onClick={props.handleCancelChange}>❌</button>
             </div>
-            )
+        </div>
+    )
 }
+
+
+class ChangeCommands extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {action: 'main'};
+    }
+    render() {
+        const component = (this.state.action === 'main') ?
+            <MainMenuChange
+                setSelectedCommand={this.props.setSelectedCommand}
+                handleDelete={this.props.handleDelete}
+                handleCancelChange={this.props.handleCancelChange}
+            /> :
+            <MainMenuChange
+                setSelectedCommand={this.props.setSelectedCommand}
+                handleDelete={this.props.handleDelete}
+                handleCancelChange={this.props.handleCancelChange}
+            />
+        return component
+    }
+}
+
+// function ChangeCommands(props) {
+//     return (<div className="row-select">
+//                 <span className="title">Редактировать комманды:</span>
+//                 <div>
+//                     <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
+//                     <button onClick={props.handleDelete}>🗑️</button>
+//                     <button>✏️</button>
+//                     <button>➕</button>
+//                     <button onClick={props.handleCancelChange}>❌</button>
+//                 </div>
+//             </div>
+//             )
+// }
 
 
 function TextView(props) {
