@@ -110,7 +110,7 @@ function MainMenuChange(props) {
                 {/*<button onClick={props.handleDelete}>🗑️</button>*/}
                 <button onClick={props.handleDelete}>🗑️</button>
                 <button onClick={props.handleEdit}>✏️</button>
-                <button>➕</button>
+                <button onClick={props.handleAdd}>➕</button>
                 <button onClick={props.handleCancelChange}>❌</button>
             </div>
         </div>
@@ -142,7 +142,7 @@ class DeleteCommand extends React.Component {
             .then(res => res.json())
                 .then(
                     (result) => {
-                        this.props.cancelDelete();
+                        this.props.handleCancel();
                         }
                     )
     }
@@ -197,7 +197,6 @@ class EditCommand extends React.Component {
             .then(res => res.json())
                 .then(
                     (result) => {
-                        // TODO: Не работает
                         this.props.handleCancel();
                         }
                     )
@@ -221,6 +220,54 @@ class EditCommand extends React.Component {
 }
 
 
+class AddCommand extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {commandName: ''};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleCreateCommand = this.handleCreateCommand.bind(this);
+
+    }
+
+    handleChange(event) {
+        this.setState({commandName: event.target.value});
+    }
+
+    handleCreateCommand() {
+        const url = `${HOST}commands/`
+        fetch(url,
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    value: this.state.commandName
+                    }),
+                headers: {"Content-type": "application/json; charset=UTF-8"}})
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.props.handleCancel();
+                        }
+                    )
+    }
+
+
+
+    render() {
+        return (
+            <div className="row-select">
+                <span className="title">Создать комманду:</span>
+                <div>
+                    <input type="text" value={this.state.commandName} onChange={this.handleChange}/>
+                    <button onClick={this.handleCreateCommand}>💾</button>
+                    <button onClick={this.props.handleCancel}>❎</button>
+                </div>
+            </div>
+        )
+    }
+
+}
+
+
 
 class ChangeCommands extends React.Component {
     constructor(props) {
@@ -229,6 +276,7 @@ class ChangeCommands extends React.Component {
         this.handleDelete = this.handleDelete.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
     }
 
     handleDelete() {
@@ -243,6 +291,11 @@ class ChangeCommands extends React.Component {
         this.setState({action: 'edit'});
     }
 
+    handleAdd() {
+        this.setState({action: 'add'});
+    }
+
+
     render() {
         switch (this.state.action) {
             case 'main':
@@ -251,6 +304,7 @@ class ChangeCommands extends React.Component {
                             handleDelete={this.handleDelete}
                             handleCancelChange={this.props.handleCancelChange}
                             handleEdit = {this.handleEdit}
+                            handleAdd = {this.handleAdd}
                         />
             case 'delete':
                 return <DeleteCommand
@@ -262,6 +316,10 @@ class ChangeCommands extends React.Component {
                         commandId={this.props.commandId}
                         handleCancel={this.handleCancel}
                     />
+            case 'add':
+                return <AddCommand
+                            handleCancel={this.handleCancel}
+                        />
         }
     }
 }
