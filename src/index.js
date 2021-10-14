@@ -197,6 +197,7 @@ class EditCommand extends React.Component {
             .then(res => res.json())
                 .then(
                     (result) => {
+                        // TODO: Не работает
                         this.props.handleCancel();
                         }
                     )
@@ -243,22 +244,25 @@ class ChangeCommands extends React.Component {
     }
 
     render() {
-        const component = (this.state.action === 'main') ?
-            <MainMenuChange
-                setSelectedCommand={this.props.setSelectedCommand}
-                handleDelete={this.handleDelete}
-                handleCancelChange={this.props.handleCancelChange}
-                handleEdit = {this.handleEdit}
-            /> : (this.state.action === 'delete') ?
-                <DeleteCommand
-                    commandId={this.props.commandId}
-                    handleCancel={this.handleCancel}
-                /> :
-                    <EditCommand
+        switch (this.state.action) {
+            case 'main':
+                return <MainMenuChange
+                            setSelectedCommand={this.props.setSelectedCommand}
+                            handleDelete={this.handleDelete}
+                            handleCancelChange={this.props.handleCancelChange}
+                            handleEdit = {this.handleEdit}
+                        />
+            case 'delete':
+                return <DeleteCommand
+                            commandId={this.props.commandId}
+                            handleCancel={this.handleCancel}
+                        />
+            case 'edit':
+                return <EditCommand
                         commandId={this.props.commandId}
                         handleCancel={this.handleCancel}
                     />
-        return component
+        }
     }
 }
 
