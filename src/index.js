@@ -402,6 +402,7 @@ class ButtonField extends React.Component {
         super(props);
         this.state = {status: 'add'};
         this.setStatusCreate = this.setStatusCreate.bind(this);
+        this.cancelCreate = this.cancelCreate.bind(this);
 
     }
 
@@ -409,11 +410,15 @@ class ButtonField extends React.Component {
         this.setState({status: 'create'});
     }
 
+    cancelCreate() {
+        this.setState({status: 'add'});
+    }
+
     render() {
         if (this.state.status == 'add') {
             return <AddButton setStatusCreate={this.setStatusCreate} />
         } else {
-            return <ButtonCreater />
+            return <ButtonCreater cancelCreate={this.cancelCreate} />
         };
     }
 }
@@ -437,6 +442,10 @@ class ButtonCreater extends React.Component {
                 <select>
                     {option_types}
                 </select>
+                <select>
+                    {option_types}
+                </select>
+                <button onClick={this.props.cancelCreate}>❌</button>
             </div>
     )
     }
