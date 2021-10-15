@@ -67,14 +67,16 @@ class CommandOptions extends React.Component {
             .then(res => res.json())
                 .then(
                     (result) => {
-                        this.props.setSelectedCommand(result[0].id, result[0].value);
-                        this.setState({
-                        options: result.map((item) =>   <option
+                        if (result.length != 0) {
+                             this.props.setSelectedCommand(result[0].id, result[0].value);
+                            this.setState({
+                            options: result.map((item) =>   <option
                                                             key={item.id}
                                                             value={item.id}>
                                                             {item.value}
                                                         </option>)
                             });
+                        }
                         }
                     )
 
