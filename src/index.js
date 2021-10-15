@@ -67,7 +67,7 @@ class CommandOptions extends React.Component {
             .then(res => res.json())
                 .then(
                     (result) => {
-                        if (result.length != 0) {
+                        if (result.length !== 0) {
                              this.props.setSelectedCommand(result[0].id, result[0].value);
                             this.setState({
                             options: result.map((item) =>   <option
@@ -387,21 +387,58 @@ function ViewTrigger(props) {
     )
 }
 
+class AddButton extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (<button className="tgbutton addbutton" onClick={this.props.setStatusCreate}>+</button>)
+    }
+}
 
-class ButtonsField extends React.Component {
+
+class ButtonField extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {status: 'add'};
+        this.setStatusCreate = this.setStatusCreate.bind(this);
+
+    }
+
+    setStatusCreate() {
+        this.setState({status: 'create'});
+    }
+
+    render() {
+        if (this.state.status == 'add') {
+            return <AddButton setStatusCreate={this.setStatusCreate} />
+        } else {
+            return <ButtonCreater />
+        };
+    }
+}
+
+
+class ButtonCreater extends React.Component {
     constructor(props) {
         super(props);
     }
 
-
     render() {
-        const buttons = this.props.buttons.map((button) =>
-            <div className="button-view"><span key={button}>{button}</span></div>);
+        const button_types = ['ReplyKeyboard', 'InlineKeyboard'];
+        const option_types = button_types.map((button_type) =>
+            <option
+                key={button_type}
+                value={button_type}>
+                    {button_type}
+            </option>);
         return (
-            <div>
-                {buttons}
+            <div className="button-creator">
+                <select>
+                    {option_types}
+                </select>
             </div>
-        )
+    )
     }
 
 }
@@ -421,27 +458,20 @@ class ButtonView extends React.Component {
     }
     
     render() {
-        const buttons = ['ReplyKeyboard', 'InlineKeyboard'];
-        const options = buttons.map((button) =>
+        const button_types = ['ReplyKeyboard', 'InlineKeyboard'];
+        const option_types = button_types.map((button_type) =>
             <option
-                key={button}
-                value={button}>
-                    {button}
+                key={button_type}
+                value={button_type}>
+                    {button_type}
             </option>);
         return (
             <div>
                 <div className="row-select">
-                    <span className="title">Тип кнопок:</span>
-                    <div>
-                        <select>
-                            {options}
-                        </select>
-                        <button onClick={this.addButton}>+</button>
-                    </div>
+                    <span className="title">Кнопки:</span>
                 </div>
                 <div>
-                    <span className="title">Кнопки:</span>
-                    <ButtonsField buttons={this.state.buttons}/>
+                    <ButtonField />
                 </div>
             </div>
     )
@@ -484,7 +514,7 @@ class CreateViewMain extends React.Component {
                     </div>
                     <Trigger trigger={this.state.trigger}/>
                     <TextView />
-                    <ButtonView buttonsField={<ButtonsField />}/>
+                    <ButtonView />
                     <div className="save-button">
                         <button>Сохранить</button>
                     </div>

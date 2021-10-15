@@ -45,3 +45,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.addbutton {
+  width: 100%;
+}
+
+.button-creator select{
+  width: 100%;
+}
