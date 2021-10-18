@@ -397,6 +397,33 @@ class AddButton extends React.Component {
 }
 
 
+class Button extends  React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {text: ''}
+    }
+
+    render() {
+        return (<button>{this.state.text}</button>)
+    }
+
+}
+
+class  ButtonFieldView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {buttons: []}
+    }
+    
+    render() {
+        return (<div>
+                    {this.state.buttons.map((button) => <Button />)}
+                </div>)
+    }
+
+}
+
+
 class ButtonField extends React.Component {
     constructor(props) {
         super(props);
@@ -416,9 +443,16 @@ class ButtonField extends React.Component {
 
     render() {
         if (this.state.status == 'add') {
-            return <AddButton setStatusCreate={this.setStatusCreate} />
+            return  <div>
+                        <ButtonFieldView />
+                        <AddButton setStatusCreate={this.setStatusCreate} />
+                    </div>
         } else {
-            return <ButtonCreater cancelCreate={this.cancelCreate} />
+            return <div>
+                        <ButtonFieldView />
+                        <ButtonCreater cancelCreate={this.cancelCreate} />
+                    </div>
+
         };
     }
 }
