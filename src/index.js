@@ -400,11 +400,13 @@ class AddButton extends React.Component {
 class Button extends  React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: ''}
+        this.state = {text: this.props.btnText};
     }
 
     render() {
-        return (<button>{this.state.text}</button>)
+        return (<div>
+                    <button className="tgbutton" disabled="disabled">{this.state.text}</button>
+                </div>)
     }
 
 }
@@ -412,12 +414,12 @@ class Button extends  React.Component {
 class  ButtonFieldView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {buttons: []}
     }
     
     render() {
+        let buttons = this.props.buttons.map((button) => <Button btnText={button}/>);
         return (<div>
-                    {this.state.buttons.map((button) => <Button />)}
+                    {buttons}
                 </div>)
     }
 
@@ -427,7 +429,7 @@ class  ButtonFieldView extends React.Component {
 class ButtonField extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {status: 'add'};
+        this.state = {status: 'add', buttons: []};
         this.setStatusCreate = this.setStatusCreate.bind(this);
         this.cancelCreate = this.cancelCreate.bind(this);
 
@@ -435,21 +437,29 @@ class ButtonField extends React.Component {
 
     setStatusCreate() {
         this.setState({status: 'create'});
+        this.setState({
+            buttons: [...this.state.buttons, '']
+        });
     }
 
     cancelCreate() {
         this.setState({status: 'add'});
+        let buttons = this.state.buttons;
+        buttons.pop();
+        this.setState({
+                buttons: buttons
+                });
     }
 
     render() {
         if (this.state.status == 'add') {
             return  <div>
-                        <ButtonFieldView />
+                        <ButtonFieldView buttons={this.state.buttons} />
                         <AddButton setStatusCreate={this.setStatusCreate} />
                     </div>
         } else {
             return <div>
-                        <ButtonFieldView />
+                        <ButtonFieldView buttons={this.state.buttons} />
                         <ButtonCreater cancelCreate={this.cancelCreate} />
                     </div>
 
@@ -476,9 +486,7 @@ class ButtonCreater extends React.Component {
                 <select>
                     {option_types}
                 </select>
-                <select>
-                    {option_types}
-                </select>
+                <input type="text"/>
                 <button onClick={this.props.cancelCreate}>❌</button>
             </div>
     )
@@ -490,24 +498,24 @@ class ButtonCreater extends React.Component {
 class ButtonView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {buttons: []};
-        this.addButton = this.addButton.bind(this);
+        // this.state = {buttons: []};
+        // this.addButton = this.addButton.bind(this);
     }
 
-    addButton() {
-        this.setState({
-            buttons: [...this.state.buttons, 'Кнопка']
-        });
-    }
-    
+    // addButton() {
+    //     this.setState({
+    //         buttons: [...this.state.buttons, 'Кнопка']
+    //     });
+    // }
+    //
     render() {
-        const button_types = ['ReplyKeyboard', 'InlineKeyboard'];
-        const option_types = button_types.map((button_type) =>
-            <option
-                key={button_type}
-                value={button_type}>
-                    {button_type}
-            </option>);
+        // const button_types = ['ReplyKeyboard', 'InlineKeyboard'];
+        // const option_types = button_types.map((button_type) =>
+        //     <option
+        //         key={button_type}
+        //         value={button_type}>
+        //             {button_type}
+        //     </option>);
         return (
             <div>
                 <div className="row-select">
