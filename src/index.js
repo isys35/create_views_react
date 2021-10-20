@@ -109,7 +109,6 @@ function MainMenuChange(props) {
             <span className="title">Редактировать комманды:</span>
             <div>
                 <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
-                {/*<button onClick={props.handleDelete}>🗑️</button>*/}
                 <button onClick={props.handleDelete}>🗑️</button>
                 <button onClick={props.handleEdit}>✏️</button>
                 <button onClick={props.handleAdd}>➕</button>
@@ -236,7 +235,7 @@ class AddCommand extends React.Component {
     }
 
     handleCreateCommand() {
-        const url = `${HOST}commands/`
+        const url = `${HOST}commands/`;
         fetch(url,
             {
                 method: 'POST',
@@ -400,12 +399,11 @@ class AddButton extends React.Component {
 class Button extends  React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: this.props.btnText};
     }
 
     render() {
         return (<div>
-                    <button className="tgbutton" disabled="disabled">{this.state.text}</button>
+                    <button className="tgbutton" disabled="disabled">{this.props.btnText}</button>
                 </div>)
     }
 
@@ -432,23 +430,22 @@ class ButtonField extends React.Component {
         this.state = {status: 'add', buttons: []};
         this.setStatusCreate = this.setStatusCreate.bind(this);
         this.cancelCreate = this.cancelCreate.bind(this);
+        this.addButton = this.addButton.bind(this);
 
     }
 
     setStatusCreate() {
         this.setState({status: 'create'});
+    }
+
+    addButton(text) {
         this.setState({
-            buttons: [...this.state.buttons, '']
+            buttons: [...this.state.buttons, text]
         });
     }
 
     cancelCreate() {
         this.setState({status: 'add'});
-        let buttons = this.state.buttons;
-        buttons.pop();
-        this.setState({
-                buttons: buttons
-                });
     }
 
     render() {
@@ -460,7 +457,7 @@ class ButtonField extends React.Component {
         } else {
             return <div>
                         <ButtonFieldView buttons={this.state.buttons} />
-                        <ButtonCreater cancelCreate={this.cancelCreate} />
+                        <ButtonCreater cancelCreate={this.cancelCreate} addButton={this.addButton}/>
                     </div>
 
         };
@@ -471,22 +468,64 @@ class ButtonField extends React.Component {
 class ButtonCreater extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {text: '', type: 'ReplyKeyboard'};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeType = this.handleChangeType.bind(this);
+        this.saveButton = this.saveButton.bind(this);
     }
+    
+    
+    handleChange(event) {
+        this.setState({text: event.target.value});
+    }
+
+    handleChangeType(event) {
+        this.setState({type: event.target.value});
+    }
+
+    saveButton() {
+        const url = (this.state.type === 'ReplyKeyboard') ? `${HOST}replybuttons` :  `${HOST}inlinebuttons`
+        fetch(url,
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    value: this.state.text
+                    }),
+                headers: {"Content-type": "application/json; charset=UTF-8"}})
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                            this.props.addButton(this.state.text);
+                            this.props.cancelCreate();
+                        }
+                    )
+    }
+
 
     render() {
         const button_types = ['ReplyKeyboard', 'InlineKeyboard'];
-        const option_types = button_types.map((button_type) =>
-            <option
-                key={button_type}
-                value={button_type}>
-                    {button_type}
-            </option>);
+        const option_types = button_types.map((button_type) => {
+            let option = (button_type === this.state.type) ? <option
+                                                            key={button_type}
+                                                            value={button_type} selected>
+                                                            {button_type}
+                                                        </option>
+                                                        : <option
+                                                            key={button_type}
+                                                            value={button_type}>
+                                                            {button_type}
+                                                        </option>;
+            return option
+        }
+            );
         return (
             <div className="button-creator">
-                <select>
+                <Button btnText={this.state.text}/>
+                <select onChange={this.handleChangeType}>
                     {option_types}
                 </select>
-                <input type="text"/>
+                <input onChange={this.handleChange} type="text" value={this.state.text}/>
+                <button onClick={this.saveButton}>💾</button>
                 <button onClick={this.props.cancelCreate}>❌</button>
             </div>
     )
@@ -498,24 +537,9 @@ class ButtonCreater extends React.Component {
 class ButtonView extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {buttons: []};
-        // this.addButton = this.addButton.bind(this);
     }
 
-    // addButton() {
-    //     this.setState({
-    //         buttons: [...this.state.buttons, 'Кнопка']
-    //     });
-    // }
-    //
     render() {
-        // const button_types = ['ReplyKeyboard', 'InlineKeyboard'];
-        // const option_types = button_types.map((button_type) =>
-        //     <option
-        //         key={button_type}
-        //         value={button_type}>
-        //             {button_type}
-        //     </option>);
         return (
             <div>
                 <div className="row-select">
