@@ -485,20 +485,22 @@ class ButtonCreater extends React.Component {
 
     saveButton() {
         const url = (this.state.type === 'ReplyKeyboard') ? `${HOST}replybuttons` :  `${HOST}inlinebuttons`
-        fetch(url,
+         fetch(url,
             {
                 method: 'POST',
                 body: JSON.stringify({
                     value: this.state.text
                     }),
                 headers: {"Content-type": "application/json; charset=UTF-8"}})
-            .then(res => res.json())
-                .then(
-                    (result) => {
-                            this.props.addButton(this.state.text);
-                            this.props.cancelCreate();
-                        }
-                    )
+            .then(async res => {
+                let result = await res.json();
+                if (!res.ok) {
+                    console.log(result.detail);
+                } else {
+                    this.props.addButton(this.state.text);
+                    this.props.cancelCreate();
+                }
+            })
     }
 
 
