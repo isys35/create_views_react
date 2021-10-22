@@ -468,10 +468,12 @@ class ButtonField extends React.Component {
 class ButtonCreater extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', type: 'ReplyKeyboard'};
+        this.state = {text: '', type: 'ReplyKeyboard', mode: 'create'};
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeType = this.handleChangeType.bind(this);
         this.saveButton = this.saveButton.bind(this);
+        this.setSelectMode = this.setSelectMode.bind(this);
+        this.setCreateMode = this.setCreateMode.bind(this);
     }
     
     
@@ -482,6 +484,15 @@ class ButtonCreater extends React.Component {
     handleChangeType(event) {
         this.setState({type: event.target.value});
     }
+
+    setSelectMode() {
+        this.setState({mode: 'select'});
+    }
+
+    setCreateMode() {
+        this.setState({mode: 'create'});
+    }
+
 
     saveButton() {
         const url = (this.state.type === 'ReplyKeyboard') ? `${HOST}replybuttons` :  `${HOST}inlinebuttons`
@@ -520,15 +531,18 @@ class ButtonCreater extends React.Component {
             return option
         }
             );
+        const inputBlock = (this.state.mode === 'create') ? <input onChange={this.handleChange} type="text" value={this.state.text}/> : <button></button>
+        const changeModeBlock = (this.state.mode === 'create') ? <button onClick={this.setSelectMode}>🔎</button> : <button onClick={this.setCreateMode}>✏️</button>
         return (
             <div className="button-creator">
                 <Button btnText={this.state.text}/>
                 <select onChange={this.handleChangeType}>
                     {option_types}
                 </select>
-                <input onChange={this.handleChange} type="text" value={this.state.text}/>
+                {inputBlock}
                 <button onClick={this.saveButton}>💾</button>
                 <button onClick={this.props.cancelCreate}>❌</button>
+                {changeModeBlock}
             </div>
     )
     }
