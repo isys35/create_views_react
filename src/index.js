@@ -495,7 +495,7 @@ class ButtonCreater extends React.Component {
 
 
     saveButton() {
-        const url = (this.state.type === 'ReplyKeyboard') ? `${HOST}replybuttons` :  `${HOST}inlinebuttons`
+        const url = (this.props.typeButtons === 'ReplyKeyboard') ? `${HOST}replybuttons` :  `${HOST}inlinebuttons`;
          fetch(url,
             {
                 method: 'POST',
@@ -516,29 +516,11 @@ class ButtonCreater extends React.Component {
 
 
     render() {
-        const button_types = ['ReplyKeyboard', 'InlineKeyboard'];
-        const option_types = button_types.map((button_type) => {
-            let option = (button_type === this.state.type) ? <option
-                                                            key={button_type}
-                                                            value={button_type} selected>
-                                                            {button_type}
-                                                        </option>
-                                                        : <option
-                                                            key={button_type}
-                                                            value={button_type}>
-                                                            {button_type}
-                                                        </option>;
-            return option
-        }
-            );
         const inputBlock = (this.state.mode === 'create') ? <input onChange={this.handleChange} type="text" value={this.state.text}/> : <button></button>
         const changeModeBlock = (this.state.mode === 'create') ? <button onClick={this.setSelectMode}>🔎</button> : <button onClick={this.setCreateMode}>✏️</button>
         return (
             <div className="button-creator">
                 <Button btnText={this.state.text}/>
-                <select onChange={this.handleChangeType}>
-                    {option_types}
-                </select>
                 {inputBlock}
                 <button onClick={this.saveButton}>💾</button>
                 <button onClick={this.props.cancelCreate}>❌</button>
@@ -553,16 +535,35 @@ class ButtonCreater extends React.Component {
 class ButtonView extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {typeButtons: 'ReplyKeyboard'}
     }
 
     render() {
+        const button_types = ['ReplyKeyboard', 'InlineKeyboard']
+        const option_types = button_types.map((button_type) => {
+            let option = (button_type === this.state.typeButtons) ? <option
+                                                            key={button_type}
+                                                            value={button_type} selected>
+                                                            {button_type}
+                                                        </option>
+                                                        : <option
+                                                            key={button_type}
+                                                            value={button_type}>
+                                                            {button_type}
+                                                        </option>;
+            return option
+        }
+            );
         return (
             <div>
                 <div className="row-select">
                     <span className="title">Кнопки:</span>
+                    <select>
+                        {option_types}
+                    </select>
                 </div>
                 <div>
-                    <ButtonField />
+                    <ButtonField typeButtons={this.state.typeButtons} />
                 </div>
             </div>
     )
@@ -595,7 +596,7 @@ class CreateViewMain extends React.Component {
         return (
 
             <div className="container">
-                <h1>Cоздание представления</h1>
+                <h1>Cоздание шага</h1>
                 <div className="create-view">
                     <div className="row-select">
                         <span className="title">Условие выполнения:</span>
