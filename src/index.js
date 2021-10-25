@@ -600,7 +600,7 @@ class CreateViewMain extends React.Component {
                 <div className="create-view">
                     <div className="row-select">
                         <span className="title">Условие выполнения:</span>
-                        <select onChange={this.handleChange}>
+                        <select className="form-control" onChange={this.handleChange}>
                             {options}
                         </select>
                     </div>

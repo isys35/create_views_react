@@ -54,12 +54,21 @@ h1 {
 
 .row-select {
   display: flex;
-  justify-content: space-between;
 }
 
 .title {
   display: inline-block;
-  width: 300px;
+  padding: 12px;
+}
+
+.form-control {
+    padding: 7px 9px 6px;
+    font-size: 14px;
+    border: 2px solid #e3e8ee;
+    border-radius: 8px;
+    color: #444;
+    white-space: pre-wrap;
+    appearance: none;
 }
 
 textarea {
