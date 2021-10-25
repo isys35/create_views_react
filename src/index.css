@@ -1,14 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+*::before, *::after {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'MoseoSansCyrl';
+    src: url('../src/fonts/MuseoSansCyrl-500.woff') format('woff');
+    font-display: swap;
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoseoSansCyrl';
+    src: url('../src/fonts/MuseoSansCyrl-700.woff') format('woff');
+    font-display: swap;
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MoseoSansCyrl';
+    src: url('../src/fonts/MuseoSansCyrl-900.woff') format('woff');
+    font-display: swap;
+    font-weight: 900;
+    font-style: normal;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'MoseoSansCyrl', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    background-color: aliceblue;
 }
 
 h1 {
   text-align: center;
+  font-weight: 700;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .create-view {
