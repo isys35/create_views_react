@@ -550,28 +550,32 @@ class ButtonView extends React.Component {
     }
 
     render() {
-        const button_types = ['ReplyKeyboard', 'InlineKeyboard']
-        const option_types = button_types.map((button_type) => {
-            let option = (button_type === this.state.typeButtons) ? <option
-                                                            key={button_type}
-                                                            value={button_type} selected>
-                                                            {button_type}
-                                                        </option>
-                                                        : <option
-                                                            key={button_type}
-                                                            value={button_type}>
-                                                            {button_type}
-                                                        </option>;
-            return option
-        }
-            );
+        const button_types = [
+            {value: 'ReplyKeyboard', text:'ReplyKeyboard'},
+            {value: 'InlineKeyboard', text:'InlineKeyboard'}
+        ];
+        // const option_types = button_types.map((button_type) => {
+        //     let option = (button_type === this.state.typeButtons) ? <option
+        //                                                     key={button_type}
+        //                                                     value={button_type} selected>
+        //                                                     {button_type}
+        //                                                 </option>
+        //                                                 : <option
+        //                                                     key={button_type}
+        //                                                     value={button_type}>
+        //                                                     {button_type}
+        //                                                 </option>;
+        //     return option
+        // }
+        //     );
         return (
             <div>
                 <div className="row-select">
-                    <span className="title">Кнопки:</span>
-                    <select>
-                        {option_types}
-                    </select>
+                    <span className="title">Тип кнопок: </span>
+                    <Select items={button_types} text={button_types[0].text} value={button_types[0].value}/>
+                    {/*<select>*/}
+                    {/*    {option_types}*/}
+                    {/*</select>*/}
                 </div>
                 <div>
                     <ButtonField typeButtons={this.state.typeButtons} />

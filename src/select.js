@@ -34,7 +34,9 @@ export class Select extends React.Component {
 
     handleSelect(value, text) {
         this.setState({value: value, text: text});
-        this.props.handleChange(value);
+        if (this.props.handleChange) {
+            this.props.handleChange(value);
+        }
     }
 
     render() {
