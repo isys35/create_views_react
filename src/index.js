@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+import { Select } from './select.js';
 
 const HOST = 'http://127.0.0.1:8000/'
 
 const executionConditions = [
-    {title:"команда", value:'command-trigger'},
-    {title:"представление", value:'view-trigger'},
+    {text:"команда", value:'command-trigger'},
+    {text:"представление", value:'view-trigger'},
 ]
 
 
@@ -581,17 +581,17 @@ class CreateViewMain extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({trigger: event.target.value});
+    handleChange(value) {
+        this.setState({trigger: value});
     }
 
     render() {
         const executionConditions = this.props.executionConditions;
         const options = executionConditions.map((executionCondition) =>
             <option
-                key={executionCondition.title}
+                key={executionCondition.text}
                 value={executionCondition.value}>
-                    {executionCondition.title}
+                    {executionCondition.text}
             </option>);
         return (
 
@@ -600,9 +600,12 @@ class CreateViewMain extends React.Component {
                 <div className="create-view">
                     <div className="row-select">
                         <span className="title">Условие выполнения:</span>
-                        <select className="form-control" onChange={this.handleChange}>
-                            {options}
-                        </select>
+                        <Select items={executionConditions}
+                                text={executionConditions[0].text}
+                                value={executionConditions[0].value} handleChange={this.handleChange} />
+                        {/*<select className="form-control" onChange={this.handleChange}>*/}
+                        {/*    {options}*/}
+                        {/*</select>*/}
                     </div>
                     <Trigger trigger={this.state.trigger}/>
                     <TextView />
