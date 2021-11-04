@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { Select } from './select.js';
+import { Load } from './load.js';
 
 const HOST = 'http://127.0.0.1:8000/'
 
@@ -54,7 +55,7 @@ class CommandOptions extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {options: [], selectedId: null};
+        this.state = {options: [], selectedId: null, isLoaded: false};
         this.handleChangeSelectedCommand = this.handleChangeSelectedCommand.bind(this);
     }
     
@@ -68,14 +69,17 @@ class CommandOptions extends React.Component {
                 .then(
                     (result) => {
                         if (result.length !== 0) {
-                             this.props.setSelectedCommand(result[0].id, result[0].value);
+                            this.props.setSelectedCommand(result[0].id, result[0].value);
                             this.setState({
-                            options: result.map((item) =>   <option
+                                options: result.map((item) =>   <option
                                                             key={item.id}
                                                             value={item.id}>
                                                             {item.value}
-                                                        </option>)
+                                                        </option>),
+                                isLoaded: true
                             });
+                        } else {
+                            console.log(result);
                         }
                         }
                     )
@@ -84,9 +88,17 @@ class CommandOptions extends React.Component {
     }
 
     render() {
-        return (<select onChange={this.handleChangeSelectedCommand}>
-                    {this.state.options}
-                </select>)
+        if (this.state.isLoaded) {
+            return (<div>
+                    <select onChange={this.handleChangeSelectedCommand}>
+                        {this.state.options}
+                    </select>
+                    <button onClick={this.props.handleChange}>🛠️</button>
+                </div>
+            )
+        } else {
+            return (<Load />)
+        }
     }
 }
     
@@ -95,8 +107,7 @@ function SelectCommand(props) {
     return (<div className="row-select">
                 <span className="title">Комманда:</span>
                 <div>
-                    <CommandOptions setSelectedCommand={props.setSelectedCommand}/>
-                    <button onClick={props.handleChange}>🛠️</button>
+                    <CommandOptions setSelectedCommand={props.setSelectedCommand} handleChange={props.handleChange}/>
                 </div>
             </div>
             )

@@ -99,3 +99,7 @@ code {
 .button-creator{
   width: 100%;
 }
+
+.load {
+    padding: 12px;
+}
