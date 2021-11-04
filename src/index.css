@@ -57,6 +57,7 @@ h1 {
 }
 
 .title {
+  font-weight: 700;
   display: inline-block;
   padding: 12px;
 }
@@ -102,4 +103,13 @@ code {
 
 .load {
     padding: 12px;
+}
+
+.textview-input {
+    font-family: 'MoseoSansCyrl';
+    font-weight: 500;
+    margin: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: aliceblue;
 }

@@ -341,7 +341,7 @@ class ChangeCommands extends React.Component {
 function TextView(props) {
     return (
         <div>
-            <textarea></textarea>
+            <textarea className="textview-input"></textarea>
         </div>
     )
 }
@@ -391,7 +391,7 @@ class CommandTrigger extends React.Component {
 function ViewTrigger(props) {
     return (<div>
                 <div className="row-select">
-                    <span>Представление:</span>
+                    <span className="title">Представление:</span>
                 </div>
             </div>
     )
