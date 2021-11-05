@@ -95,9 +95,17 @@ code {
 }
 
 .tgbutton {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: inline-block;
   width: 100%;
-  height: 35px;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  color: rgba(66, 67, 72, 0.8);
 }
+
+
 
 .button-creator{
   width: 100%;

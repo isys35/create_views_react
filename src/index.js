@@ -402,7 +402,7 @@ class AddButton extends React.Component {
         super(props);
     }
     render() {
-        return (<button className="tgbutton addbutton" onClick={this.props.setStatusCreate}>+</button>)
+        return (<div className="tgbutton addbutton" onClick={this.props.setStatusCreate}>Добавить кнопку</div>)
     }
 }
 
