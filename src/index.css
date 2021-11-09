@@ -92,11 +92,12 @@ textarea {
 }
 
 .save-button svg {
+    fill: rgba(66, 67, 72, 0.8);
     transition: 0.4s;
 }
 
 .save-button svg:hover {
-    fill: green;
+    fill: #43a743;
 }
 
 .save-button svg {

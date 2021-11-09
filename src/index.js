@@ -71,11 +71,7 @@ class CommandOptions extends React.Component {
                         if (result.length !== 0) {
                             this.props.setSelectedCommand(result[0].id, result[0].value);
                             this.setState({
-                                options: result.map((item) =>   <option
-                                                            key={item.id}
-                                                            value={item.id}>
-                                                            {item.value}
-                                                        </option>),
+                                options: result.map((item) => { return {text: item.value, value: item.id} }),
                                 isLoaded: true
                             });
                         } else {
@@ -90,9 +86,10 @@ class CommandOptions extends React.Component {
     render() {
         if (this.state.isLoaded) {
             return (<div>
-                    <select onChange={this.handleChangeSelectedCommand}>
-                        {this.state.options}
-                    </select>
+                    <Select items={this.state.options} text={this.state.options[0].text} value={this.state.options[0].value} />
+                    {/*<select onChange={this.handleChangeSelectedCommand}>*/}
+                    {/*    {this.state.options}*/}
+                    {/*</select>*/}
                     <button onClick={this.props.handleChange}>🛠️</button>
                 </div>
             )
