@@ -1,3 +1,7 @@
+:root {
+    --grey-color: rgba(66, 67, 72, 0.8);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -92,7 +96,7 @@ textarea {
 }
 
 .save-button svg {
-    fill: rgba(66, 67, 72, 0.8);
+    fill: var(--grey-color);
     transition: 0.4s;
 }
 
@@ -124,7 +128,7 @@ code {
   padding: 12px;
   margin: 12px;
   border-radius: 8px;
-  color: rgba(66, 67, 72, 0.8);
+  color: var(--grey-color);
 }
 
 
@@ -144,4 +148,24 @@ code {
     padding: 12px;
     border-radius: 8px;
     background-color: aliceblue;
+}
+
+.settings-icon-path{
+    fill:none;
+    stroke: var(--grey-color);
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.settings-icon {
+    display: inline-block;
+    width: 70px;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.command-field {
+    display: flex;
+    flex-direction: row;
+
 }
