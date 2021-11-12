@@ -151,7 +151,7 @@ code {
     background-color: aliceblue;
 }
 
-.settings-icon {
+.settings-icon, .cancel-button {
     display: inline-block;
     fill: var(--grey-color);
     padding: 5px;
@@ -161,8 +161,14 @@ code {
 }
 
 
+
 .settings-icon:hover {
     fill: var(--green-color);
+}
+
+
+.cancel-button:hover {
+    fill: #a53e3e;
 }
 
 
