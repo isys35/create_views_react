@@ -151,7 +151,7 @@ code {
     background-color: aliceblue;
 }
 
-.settings-icon, .cancel-button {
+.settings-icon {
     display: inline-block;
     fill: var(--grey-color);
     padding: 5px;
@@ -160,9 +160,24 @@ code {
     transition: 0.4s;
 }
 
+.cancel-button, .edit-button {
+    display: inline-block;
+    fill: var(--grey-color);
+    margin-top: 5px;
+    padding: 5px;
+    width: 35px;
+    cursor: pointer;
+    transition: 0.4s;
+}
 
 
-.settings-icon:hover {
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.settings-icon:hover, .edit-button:hover {
     fill: var(--green-color);
 }
 
