@@ -1,5 +1,6 @@
 :root {
     --grey-color: rgba(66, 67, 72, 0.8);
+    --green-color: #43a743;
 }
 
 * {
@@ -101,7 +102,7 @@ textarea {
 }
 
 .save-button svg:hover {
-    fill: #43a743;
+    fill: var(--green-color);
 }
 
 .save-button svg {
@@ -150,22 +151,27 @@ code {
     background-color: aliceblue;
 }
 
-.settings-icon-path{
-    fill:none;
-    stroke: var(--grey-color);
-    stroke-linecap:round;
-    stroke-linejoin:round;
-}
-
 .settings-icon {
     display: inline-block;
-    width: 70px;
-    padding: 12px;
+    fill: var(--grey-color);
+    padding: 5px;
+    width: 50px;
     cursor: pointer;
+    transition: 0.4s;
 }
+
+
+.settings-icon:hover {
+    fill: var(--green-color);
+}
+
 
 .command-field {
     display: flex;
     flex-direction: row;
 
+}
+
+.command-field .select {
+    margin-right: 20px;
 }
