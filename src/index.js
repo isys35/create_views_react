@@ -83,7 +83,7 @@ function CancelButton(props) {
 
 
 function EditButton(props) {
-    return <div className="edit-button">
+    return <div className="edit-button" onClick={props.handleEdit}>
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8787 1.70705C17.0503 0.535478 18.9497 0.535474 20.1213 1.70705L22.2929 3.87862C23.4645 5.05019 23.4645 6.94969 22.2929 8.12126L8.29289 22.1213C7.73028 22.6839 6.96722 22.9999 6.17157 22.9999H2C1.44772 22.9999 1 22.5522 1 21.9999V17.8284C1 17.0327 1.31607 16.2697 1.87868 15.7071L15.8787 1.70705ZM18.7071 3.12126C18.3166 2.73074 17.6834 2.73074 17.2929 3.12126L15.4142 4.99994L19 8.58573L20.8787 6.70705C21.2692 6.31653 21.2692 5.68336 20.8787 5.29284L18.7071 3.12126ZM17.5858 9.99994L14 6.41416L3.29289 17.1213C3.10536 17.3088 3 17.5632 3 17.8284V20.9999H6.17157C6.43679 20.9999 6.69114 20.8946 6.87868 20.707L17.5858 9.99994Z"/>
                 </svg>
@@ -128,7 +128,7 @@ class CommandOptions extends React.Component {
             const buttons = (this.props.type == 'select') ?
                 <SettingsButton handleChange={this.props.handleChange}/> :
                 <div className="buttons">
-                    <EditButton />
+                    <EditButton  handleEdit={this.props.handleEdit}/>
                     <CancelButton handleCancelChange={this.props.handleCancelChange}/>
                 </div>;
             return (<div className="command-field">
@@ -163,7 +163,12 @@ function MainMenuChange(props) {
         <div className="row-select">
             <span className="title">Редактировать комманды:</span>
             <div>
-                <CommandOptions setSelectedCommand={props.setSelectedCommand} handleCancelChange={props.handleCancelChange} type='edit'/>
+                <CommandOptions
+                    setSelectedCommand={props.setSelectedCommand}
+                    handleCancelChange={props.handleCancelChange}
+                    handleEdit={props.handleEdit}
+                    type='edit'
+                />
                 {/*<button onClick={props.handleDelete}>🗑️</button>*/}
                 {/*<button onClick={props.handleEdit}>✏️</button>*/}
                 {/*<button onClick={props.handleAdd}>➕</button>*/}
