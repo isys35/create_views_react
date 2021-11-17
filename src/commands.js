@@ -147,11 +147,9 @@ class EditCommand extends React.Component {
                 <span className="title">Изменить текст комманды:</span>
                 <div className="command-field">
                     <input type="text" value={this.state.commandName} onChange={this.handleChange}/>
-                    {/*<button onClick={this.handleSaveChange}>💾</button>*/}
-                    {/*<button onClick={this.props.handleCancel}>❎</button>*/}
                 </div>
                 <div className="buttons">
-                        <SaveButton />
+                        <SaveButton onClick={this.handleSaveChange} />
                         <CancelButton  onClick={this.props.handleCancel}/>
                 </div>
             </div>
