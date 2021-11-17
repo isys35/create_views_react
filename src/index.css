@@ -89,12 +89,6 @@ textarea {
   text-align: center;
 }
 
-.save-button {
-    width: 45px;
-    display: inline-block;
-    margin: 12px;
-    cursor: pointer;
-}
 
 .save-button svg {
     fill: var(--grey-color);
@@ -152,6 +146,7 @@ code {
 }
 
 input {
+    display: block;
     font-family: 'MoseoSansCyrl';
     padding: 12px;
     border-radius: 8px;
@@ -183,6 +178,14 @@ input:focus {
     transition: 0.4s;
 }
 
+.save-button {
+    display: inline-block;
+    width: 35px;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
 
 .buttons {
     display: flex;
@@ -190,7 +193,7 @@ input:focus {
 }
 
 
-.settings-icon:hover, .edit-button:hover {
+.settings-icon:hover, .edit-button:hover, .save-button {
     fill: var(--green-color);
 }
 
@@ -206,6 +209,6 @@ input:focus {
 
 }
 
-.command-field .select {
+.command-field .select, .command-field input {
     margin-right: 20px;
 }

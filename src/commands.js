@@ -1,6 +1,6 @@
 import React from 'react';
 import { HOST } from './settings';
-import { SettingsButton, EditButton, CancelButton } from './action-buttons';
+import { SettingsButton, EditButton, CancelButton, SaveButton } from './action-buttons';
 import { Select } from './select';
 import { Load } from './load';
 
@@ -145,10 +145,14 @@ class EditCommand extends React.Component {
         return (
             <div className="row-select">
                 <span className="title">Изменить текст комманды:</span>
-                <div>
+                <div className="command-field">
                     <input type="text" value={this.state.commandName} onChange={this.handleChange}/>
-                    <button onClick={this.handleSaveChange}>💾</button>
-                    <button onClick={this.props.handleCancel}>❎</button>
+                    {/*<button onClick={this.handleSaveChange}>💾</button>*/}
+                    {/*<button onClick={this.props.handleCancel}>❎</button>*/}
+                </div>
+                <div className="buttons">
+                        <SaveButton />
+                        <CancelButton  onClick={this.props.handleCancel}/>
                 </div>
             </div>
         )
@@ -252,10 +256,10 @@ class CommandOptions extends React.Component {
     render() {
         if (this.state.isLoaded) {
             const buttons = (this.props.type == 'select') ?
-                <SettingsButton handleChange={this.props.handleChange}/> :
+                <SettingsButton onClick={this.props.handleChange}/> :
                 <div className="buttons">
-                    <EditButton  handleEdit={this.props.handleEdit}/>
-                    <CancelButton handleCancelChange={this.props.handleCancelChange}/>
+                    <EditButton  onClick={this.props.handleEdit}/>
+                    <CancelButton onClick={this.props.handleCancelChange}/>
                 </div>;
             return (<div className="command-field">
                     <Select items={this.state.options}
