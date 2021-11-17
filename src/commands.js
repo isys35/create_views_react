@@ -144,7 +144,7 @@ class EditCommand extends React.Component {
     render() {
         return (
             <div className="row-select">
-                <span className="title">Изменить комманду:</span>
+                <span className="title">Изменить текст комманды:</span>
                 <div>
                     <input type="text" value={this.state.commandName} onChange={this.handleChange}/>
                     <button onClick={this.handleSaveChange}>💾</button>
