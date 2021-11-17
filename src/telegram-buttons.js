@@ -183,7 +183,9 @@ export class ButtonView extends React.Component {
             {value: 'ReplyKeyboard', text:'ReplyKeyboard'},
             {value: 'InlineKeyboard', text:'InlineKeyboard'}
         ];
-        const buttonField = (this.state.typeButtons == 'ReplyKeyboard') ? <div><ButtonField typeButtons={this.state.typeButtons} /></div> : <div></div>;
+        const buttonField = (this.state.typeButtons == 'ReplyKeyboard')
+            ? <div><ButtonField typeButtons={this.state.typeButtons} /></div>
+            : <div><span>Inline кнопки недоступны</span></div>;
         return (
             <div>
                 <SelectButtonType buttonTypes={buttonTypes} onChangeType={this.changeType} />
