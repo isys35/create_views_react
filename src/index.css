@@ -168,7 +168,11 @@ input:focus {
     transition: 0.4s;
 }
 
-.cancel-button, .edit-button, .add-button {
+.cancel-button,
+.edit-button,
+.add-button,
+.delete-button,
+.confirm-button {
     display: inline-block;
     fill: var(--grey-color);
     margin-top: 5px;
@@ -193,13 +197,21 @@ input:focus {
 }
 
 
-.settings-icon:hover, .edit-button:hover, .save-button, .add-button:hover {
+.settings-icon:hover,
+.edit-button:hover,
+.save-button:hover,
+.add-button:hover,
+.confirm-button:hover {
     fill: var(--green-color);
 }
 
 
-.cancel-button:hover {
+.cancel-button:hover, .delete-button:hover {
     fill: #a53e3e;
+}
+
+.buttons .confirm-button {
+    margin-top: 7px;
 }
 
 

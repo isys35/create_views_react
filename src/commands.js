@@ -1,6 +1,12 @@
 import React from 'react';
 import { HOST } from './settings';
-import { SettingsButton, EditButton, CancelButton, SaveButton, AddButton } from './action-buttons';
+import { SettingsButton,
+    EditButton,
+    CancelButton,
+    SaveButton,
+    AddButton,
+    DeleteButton,
+    ConfirmButton } from './action-buttons';
 import { Select } from './select';
 import { Load } from './load';
 
@@ -47,6 +53,7 @@ function MainMenuChangeCommands(props) {
                     handleCancelChange={props.handleCancelChange}
                     handleEdit={props.handleEdit}
                     handleAdd={props.handleAdd}
+                    handleDelete={props.handleDelete}
                     commandId={props.commandId}
                     type='edit'
                 />
@@ -90,8 +97,10 @@ class DeleteCommand extends React.Component {
             <div className="row-select">
                 <span className="title">Удалить комманду "{this.state.commandName}" ?</span>
                 <div>
-                    <button onClick={this.handleDelete}>✅</button>
-                    <button onClick={this.props.handleCancel}>❎</button>
+                    <div className="buttons">
+                        <ConfirmButton onClick={this.handleDelete} />
+                        <CancelButton onClick={this.props.handleCancel} />
+                    </div>
                 </div>
             </div>
         )
@@ -261,6 +270,7 @@ class CommandOptions extends React.Component {
                 <div className="buttons">
                     <EditButton  onClick={this.props.handleEdit}/>
                     <AddButton onClick={this.props.handleAdd}/>
+                    <DeleteButton onClick={this.props.handleDelete}/>
                     <CancelButton onClick={this.props.handleCancelChange}/>
                 </div>;
             return (<div className="command-field">
@@ -311,7 +321,6 @@ class ChangeCommands extends React.Component {
     }
 
     handleAdd() {
-        console.log('add');
         this.setState({action: 'add'});
     }
 
