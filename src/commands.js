@@ -208,7 +208,7 @@ class CommandOptions extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {options: [], selectedId: null, isLoaded: false};
+        this.state = {options: [], selectedId: null, selectedText:null, isLoaded: false};
         this.handleChangeSelectedCommand = this.handleChangeSelectedCommand.bind(this);
     }
     
@@ -222,9 +222,22 @@ class CommandOptions extends React.Component {
                 .then(
                     (result) => {
                         if (result.length !== 0) {
-                            this.props.setSelectedCommand(result[0].id, result[0].value);
+                            let selectedCommandid = result[0].id;
+                            let selectedText = result[0].value;
+                            if (this.props.commandId) {
+                                selectedCommandid = this.props.commandId;
+                                for (let i = 0; i < result.length; i++) {
+                                    if (selectedCommandid == result[i].id) {
+                                        selectedText = result[i].value;
+                                        break
+                                    }
+                                }
+                            }
+                            this.props.setSelectedCommand(selectedCommandid);
                             this.setState({
                                 options: result.map((item) => { return {text: item.value, value: item.id} }),
+                                selectedId: selectedCommandid,
+                                selectedText: selectedText,
                                 isLoaded: true
                             });
                         } else {
@@ -245,7 +258,10 @@ class CommandOptions extends React.Component {
                     <CancelButton handleCancelChange={this.props.handleCancelChange}/>
                 </div>;
             return (<div className="command-field">
-                    <Select items={this.state.options} text={this.state.options[0].text} value={this.state.options[0].value} handleChange={this.handleChangeSelectedCommand} />
+                    <Select items={this.state.options}
+                            text={this.state.selectedText}
+                            value={this.state.selectedId}
+                            handleChange={this.handleChangeSelectedCommand} />
                     {buttons}
                 </div>
             )
@@ -325,7 +341,7 @@ class ChangeCommands extends React.Component {
 export class CommandTrigger extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {action: 'select', selectedCommandId: null, selectedCommandName: null};
+        this.state = {action: 'select', selectedCommandId: null};
         this.handleChange = this.handleChange.bind(this);
         this.handleCancelChange = this.handleCancelChange.bind(this);
         this.setSelectedCommand = this.setSelectedCommand.bind(this);
