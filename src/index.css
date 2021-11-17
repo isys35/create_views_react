@@ -168,7 +168,7 @@ input:focus {
     transition: 0.4s;
 }
 
-.cancel-button, .edit-button {
+.cancel-button, .edit-button, .add-button {
     display: inline-block;
     fill: var(--grey-color);
     margin-top: 5px;
@@ -193,7 +193,7 @@ input:focus {
 }
 
 
-.settings-icon:hover, .edit-button:hover, .save-button {
+.settings-icon:hover, .edit-button:hover, .save-button, .add-button:hover {
     fill: var(--green-color);
 }
 

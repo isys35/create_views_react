@@ -1,6 +1,6 @@
 import React from 'react';
 import { HOST } from './settings';
-import { SettingsButton, EditButton, CancelButton, SaveButton } from './action-buttons';
+import { SettingsButton, EditButton, CancelButton, SaveButton, AddButton } from './action-buttons';
 import { Select } from './select';
 import { Load } from './load';
 
@@ -46,6 +46,7 @@ function MainMenuChangeCommands(props) {
                     setSelectedCommand={props.setSelectedCommand}
                     handleCancelChange={props.handleCancelChange}
                     handleEdit={props.handleEdit}
+                    handleAdd={props.handleAdd}
                     commandId={props.commandId}
                     type='edit'
                 />
@@ -195,10 +196,12 @@ class AddCommand extends React.Component {
         return (
             <div className="row-select">
                 <span className="title">Создать комманду:</span>
-                <div>
+                <div className="command-field">
                     <input type="text" value={this.state.commandName} onChange={this.handleChange}/>
-                    <button onClick={this.handleCreateCommand}>💾</button>
-                    <button onClick={this.props.handleCancel}>❎</button>
+                </div>
+                <div className="buttons">
+                    <SaveButton onClick={this.handleCreateCommand}/>
+                    <CancelButton onClick={this.props.handleCancel}/>
                 </div>
             </div>
         )
@@ -257,6 +260,7 @@ class CommandOptions extends React.Component {
                 <SettingsButton onClick={this.props.handleChange}/> :
                 <div className="buttons">
                     <EditButton  onClick={this.props.handleEdit}/>
+                    <AddButton onClick={this.props.handleAdd}/>
                     <CancelButton onClick={this.props.handleCancelChange}/>
                 </div>;
             return (<div className="command-field">
@@ -307,6 +311,7 @@ class ChangeCommands extends React.Component {
     }
 
     handleAdd() {
+        console.log('add');
         this.setState({action: 'add'});
     }
 
