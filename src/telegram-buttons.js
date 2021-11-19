@@ -52,6 +52,7 @@ class ButtonField extends React.Component {
 
     setStatusCreate() {
         this.setState({status: 'create'});
+        this.props.changeWithButtonsStatus();
     }
 
     addButton(text) {
@@ -151,13 +152,13 @@ class ButtonCreater extends React.Component {
 class SelectButtonType extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {status: 'active'};
     }
 
     render() {
+        const selectType = (!this.props.inactiveStatus) ? <Select items={this.props.buttonTypes} text={this.props.buttonTypes[0].text} value={this.props.buttonTypes[0].value} handleChange = {this.props.onChangeType}/> : <div></div>
         return <div className="row-select">
                     <span className="title">Тип кнопок: </span>
-                    <Select items={this.props.buttonTypes} text={this.props.buttonTypes[0].text} value={this.props.buttonTypes[0].value} handleChange = {this.props.onChangeType}/>
+                        {selectType}
                 </div>
 
     }
@@ -168,13 +169,20 @@ class SelectButtonType extends React.Component {
 export class ButtonView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {typeButtons: 'ReplyKeyboard'}
+        this.state = {typeButtons: 'ReplyKeyboard', withButtons: false}
         this.changeType = this.changeType.bind(this);
+        this.changeWithButtonsStatus = this.changeWithButtonsStatus.bind(this);
     }
 
     changeType(type) {
         this.setState(
             {typeButtons: type}
+        )
+    }
+
+    changeWithButtonsStatus() {
+        this.setState(
+            {withButtons: !this.state.withButtons}
         )
     }
 
@@ -184,11 +192,20 @@ export class ButtonView extends React.Component {
             {value: 'InlineKeyboard', text:'InlineKeyboard'}
         ];
         const buttonField = (this.state.typeButtons == 'ReplyKeyboard')
-            ? <div><ButtonField typeButtons={this.state.typeButtons} /></div>
+            ? <div>
+                <ButtonField
+                    typeButtons={this.state.typeButtons}
+                    changeWithButtonsStatus={this.changeWithButtonsStatus}
+                />
+              </div>
             : <div><span>Inline кнопки недоступны</span></div>;
         return (
             <div>
-                <SelectButtonType buttonTypes={buttonTypes} onChangeType={this.changeType} />
+                <SelectButtonType
+                    buttonTypes={buttonTypes}
+                    onChangeType={this.changeType}
+                    inactiveStatus={this.state.withButtons}
+                />
                 { buttonField }
             </div>
     )
