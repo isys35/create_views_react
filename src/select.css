@@ -19,6 +19,11 @@
     cursor: pointer;
 }
 
+.select.inactive .select__head {
+    background-color: #d5d5d5;
+    color: black;
+}
+
 .select__head::after {
     width: 10px;
     height: 6px;
@@ -34,6 +39,10 @@
 
 .select__head.open::after {
     transform: translateY(50%) rotate(180deg);
+}
+
+.select.inactive .select__head::after {
+    background: none;
 }
 
 

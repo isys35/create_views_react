@@ -155,7 +155,13 @@ class SelectButtonType extends React.Component {
     }
 
     render() {
-        const selectType = (!this.props.inactiveStatus) ? <Select items={this.props.buttonTypes} text={this.props.buttonTypes[0].text} value={this.props.buttonTypes[0].value} handleChange = {this.props.onChangeType}/> : <div></div>
+        const selectType = <Select
+                                items={this.props.buttonTypes}
+                                text={this.props.buttonTypes[0].text}
+                                value={this.props.buttonTypes[0].value}
+                                handleChange = {this.props.onChangeType}
+                                inactive={this.props.inactiveStatus}
+                            />
         return <div className="row-select">
                     <span className="title">Тип кнопок: </span>
                         {selectType}
@@ -191,6 +197,7 @@ export class ButtonView extends React.Component {
             {value: 'ReplyKeyboard', text:'ReplyKeyboard'},
             {value: 'InlineKeyboard', text:'InlineKeyboard'}
         ];
+        console.log(this.state.typeButtons);
         const buttonField = (this.state.typeButtons == 'ReplyKeyboard')
             ? <div>
                 <ButtonField
