@@ -7,6 +7,7 @@ import { CommandTrigger } from './commands';
 import { HOST } from './settings';
 import { SaveButton } from './action-buttons'
 import { ButtonView } from  './telegram-buttons'
+import { SelectWithSettings } from './select-with-settings'
 
 
 const executionConditions = [
@@ -92,7 +93,20 @@ class CreateViewMain extends React.Component {
 }
 
 
+// ReactDOM.render(
+//   <CreateViewMain executionConditions={executionConditions} />,
+//   document.getElementById('root')
+// );
+
+
 ReactDOM.render(
-  <CreateViewMain executionConditions={executionConditions} />,
+  <SelectWithSettings
+      mainTitle="Комманда"
+      changeTitle="Редактировать комманды"
+      changeTextTitle="Изменить текст комманды"
+      createTitle="Создать комманду"
+      deleteTitle="Удалить комманду"
+      restURLpath = "commands"
+  />,
   document.getElementById('root')
 );
