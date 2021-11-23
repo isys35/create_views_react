@@ -372,7 +372,7 @@ class Add extends React.Component {
             <div className="row-select">
                 <span className="title">Создать комманду:</span>
                 <div className="command-field">
-                    <input type="text" value={this.state.commandName} onChange={this.handleChange}/>
+                    <input type="text" value={this.state.name} onChange={this.handleChange}/>
                 </div>
                 <div className="buttons">
                     <SaveButton onClick={this.handleCreate}/>

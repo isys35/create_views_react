@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Select } from './select.js';
 import { Load } from './load.js';
-import { CommandTrigger } from './commands';
 import { HOST } from './settings';
 import { SaveButton } from './action-buttons'
 import { ButtonView } from  './telegram-buttons'
@@ -18,7 +17,15 @@ const executionConditions = [
 
 function Trigger(props) {
     const trigger = props.trigger
-    const component = (trigger === 'command-trigger') ? <CommandTrigger /> : <ViewTrigger />
+    const component = (trigger === 'command-trigger') ?   <SelectWithSettings
+                                                                mainTitle="Комманда"
+                                                                changeTitle="Редактировать комманды"
+                                                                changeTextTitle="Изменить текст комманды"
+                                                                createTitle="Создать комманду"
+                                                                deleteTitle="Удалить комманду"
+                                                                restURLpath = "commands"
+                                                            />
+                                                       :   <ViewTrigger />
     return component
 }
 
@@ -93,20 +100,7 @@ class CreateViewMain extends React.Component {
 }
 
 
-// ReactDOM.render(
-//   <CreateViewMain executionConditions={executionConditions} />,
-//   document.getElementById('root')
-// );
-
-
 ReactDOM.render(
-  <SelectWithSettings
-      mainTitle="Комманда"
-      changeTitle="Редактировать комманды"
-      changeTextTitle="Изменить текст комманды"
-      createTitle="Создать комманду"
-      deleteTitle="Удалить комманду"
-      restURLpath = "commands"
-  />,
+  <CreateViewMain executionConditions={executionConditions} />,
   document.getElementById('root')
 );

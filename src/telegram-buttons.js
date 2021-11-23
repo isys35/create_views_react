@@ -1,6 +1,7 @@
 import React from 'react';
 import { HOST } from './settings';
 import { Select } from './select.js';
+import { SelectWithSettings } from './select-with-settings';
 
 class AddButton extends React.Component {
     constructor(props) {
@@ -155,7 +156,14 @@ class ButtonCreater extends React.Component {
     }
 
     render() {
-        return <div></div>
+        return <SelectWithSettings
+                mainTitle="Выберите кнопку"
+                changeTitle="Редактировать кнопки"
+                changeTextTitle="Изменить текст кнопки"
+                createTitle="Создать кнопку"
+                deleteTitle="Удалить кнопку"
+                restURLpath="replybuttons"
+                />
     }
 }
 
