@@ -354,7 +354,7 @@ class Add extends React.Component {
             {
                 method: 'POST',
                 body: JSON.stringify({
-                    value: this.state.commandName
+                    value: this.state.name
                     }),
                 headers: {"Content-type": "application/json; charset=UTF-8"}})
             .then(res => res.json())
@@ -375,7 +375,7 @@ class Add extends React.Component {
                     <input type="text" value={this.state.commandName} onChange={this.handleChange}/>
                 </div>
                 <div className="buttons">
-                    <SaveButton onClick={this.handleCreateCommand}/>
+                    <SaveButton onClick={this.handleCreate}/>
                     <CancelButton onClick={this.props.handleCancel}/>
                 </div>
             </div>
