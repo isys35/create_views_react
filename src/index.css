@@ -224,3 +224,15 @@ input:focus {
 .command-field .select, .command-field input {
     margin-right: 20px;
 }
+
+.create-button-field {
+    display: inline-block;
+    width: 100%;
+    padding: 25px;
+    border: solid var(--grey-color);
+    border-radius: 15px;
+}
+
+.create-button-field .title {
+    min-width: 100px;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { HOST } from './settings';
 import { Select } from './select.js';
 import { SelectWithSettings } from './select-with-settings';
+import { SaveButton } from './action-buttons'
 
 class AddButton extends React.Component {
     constructor(props) {
@@ -64,6 +65,7 @@ class ButtonField extends React.Component {
 
     cancelCreate() {
         this.setState({status: 'add'});
+        this.props.changeWithButtonsStatus();
     }
 
     render() {
@@ -153,17 +155,40 @@ class ButtonField extends React.Component {
 class ButtonCreater extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {status: 'select'};
     }
 
+
     render() {
-        return <SelectWithSettings
-                mainTitle="Выберите кнопку"
-                changeTitle="Редактировать кнопки"
-                changeTextTitle="Изменить текст кнопки"
-                createTitle="Создать кнопку"
-                deleteTitle="Удалить кнопку"
-                restURLpath="replybuttons"
-                />
+        const selectButton = (this.state.status === 'select') ? <div className="create-button-field">
+                                                                    <SelectWithSettings
+                                                                        mainTitle="Выберите кнопку"
+                                                                        changeTitle="Редактировать кнопки"
+                                                                        changeTextTitle="Изменить текст кнопки"
+                                                                        createTitle="Создать кнопку"
+                                                                        deleteTitle="Удалить кнопку"
+                                                                        restURLpath="replybuttons"
+                                                                    />
+                                                                    <div className="row-select">
+                                                                        <div>
+                                                                            Подтвердить
+                                                                        </div>
+                                                                        <div onClick={this.props.cancelCreate}>
+                                                                            Отменить
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                              :  <div className="create-button-field">
+                                                                    <SelectWithSettings
+                                                                        mainTitle="Выберите кнопку"
+                                                                        changeTitle="Редактировать кнопки"
+                                                                        changeTextTitle="Изменить текст кнопки"
+                                                                        createTitle="Создать кнопку"
+                                                                        deleteTitle="Удалить кнопку"
+                                                                        restURLpath="replybuttons"
+                                                                    />
+                                                                </div>
+        return selectButton
     }
 }
 
