@@ -45,7 +45,7 @@ export class Select extends React.Component {
     }
 
     render() {
-        const selectItems = (this.props.items == undefined) ? null : this.props.items.map(
+        const selectItems = (this.props.items === undefined) ? null : this.props.items.map(
                             (item) => <SelectItem className="select__item" value={item.value} text={item.text} handleSelect={this.handleSelect}/>
                         );
         return (

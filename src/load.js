@@ -21,7 +21,7 @@ export class Load extends React.Component {
 
     tick() {
         var loadId = this.state.loadId;
-        if (loadId == 2 ) {
+        if (loadId === 2 ) {
             this.setState({loadId: 0});
         } else {
             var newID = loadId + 1;

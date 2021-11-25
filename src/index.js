@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { Select } from './select.js';
-import { Load } from './load.js';
-import { HOST } from './settings';
 import { SaveButton } from './action-buttons'
 import { ButtonView } from  './telegram-buttons'
 import { SelectWithSettings } from './select-with-settings'
@@ -68,12 +66,6 @@ class CreateViewMain extends React.Component {
 
     render() {
         const executionConditions = this.props.executionConditions;
-        const options = executionConditions.map((executionCondition) =>
-            <option
-                key={executionCondition.text}
-                value={executionCondition.value}>
-                    {executionCondition.text}
-            </option>);
         return (
 
             <div className="container">

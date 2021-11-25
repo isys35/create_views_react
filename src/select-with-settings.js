@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { HOST } from './settings';
 import { SettingsButton,
     EditButton,
@@ -139,6 +138,8 @@ class ChangeMenu extends React.Component {
                             restURLpath={this.props.restURLpath}
                             handleCancel={this.handleCancel}
                         />
+            default:
+                // do nothing
         }
     }
 }
@@ -163,7 +164,7 @@ class Options extends React.Component {
         if (this.props.id) {
             selectedId = this.props.id;
             for (let i = 0; i < data.length; i++) {
-                if (selectedId == data[i].id) {
+                if (selectedId === data[i].id) {
                     selectedText = data[i].value;
                     break;
                 }
@@ -202,7 +203,7 @@ class Options extends React.Component {
 
     render() {
         if (this.state.isLoaded) {
-            const buttons = (this.props.type == 'select') ?
+            const buttons = (this.props.type === 'select') ?
                 <SettingsButton onClick={this.props.handleChange}/> :
                 <div className="buttons">
                     <EditButton  onClick={this.props.handleEdit}/>

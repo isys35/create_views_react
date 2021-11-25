@@ -1,44 +1,24 @@
 import React from 'react';
-import { HOST } from './settings';
 import { Select } from './select.js';
 import { SelectWithSettings } from './select-with-settings';
-import { SaveButton } from './action-buttons'
 
-class AddButton extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return (<div className="tgbutton addbutton" onClick={this.props.setStatusCreate}>Добавить кнопку</div>)
-    }
+
+function AddButton(props) {
+    return (<div className="tgbutton addbutton" onClick={props.setStatusCreate}>Добавить кнопку</div>)
 }
 
 
-class Button extends  React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (<div>
-                    <button className="tgbutton" disabled="disabled">{this.props.btnText}</button>
-                </div>)
-    }
-
+function Button(props) {
+    return (<div>
+                <button className="tgbutton" disabled="disabled">{props.btnText}</button>
+            </div>)
 }
 
-class  ButtonFieldView extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    
-    render() {
-        let buttons = this.props.buttons.map((button) => <Button btnText={button}/>);
+function  ButtonFieldView(props) {
+        let buttons = props.buttons.map((button) => <Button btnText={button}/>);
         return (<div>
                     {buttons}
                 </div>)
-    }
-
 }
 
 
@@ -69,7 +49,7 @@ class ButtonField extends React.Component {
     }
 
     render() {
-        if (this.state.status == 'add') {
+        if (this.state.status === 'add') {
             return  <div>
                         <ButtonFieldView buttons={this.state.buttons} />
                         <AddButton setStatusCreate={this.setStatusCreate} />
@@ -108,7 +88,7 @@ class ButtonCreater extends React.Component {
 
     changeStatus() {
         this.setState(
-            {status: (this.state.status == "select") ? "edit" : "select"}
+            {status: (this.state.status === "select") ? "edit" : "select"}
         )
     }
 
@@ -138,25 +118,20 @@ class ButtonCreater extends React.Component {
 }
 
 
-class SelectButtonType extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+function SelectButtonType(props) {
 
-    render() {
-        const selectType = <Select
-                                items={this.props.buttonTypes}
-                                text={this.props.buttonTypes[0].text}
-                                value={this.props.buttonTypes[0].value}
-                                handleChange = {this.props.onChangeType}
-                                inactive={this.props.inactiveStatus}
-                            />
-        return <div className="row-select">
-                    <span className="title">Тип кнопок: </span>
-                        {selectType}
-                </div>
+    const selectType = <Select
+                            items={props.buttonTypes}
+                            text={props.buttonTypes[0].text}
+                            value={props.buttonTypes[0].value}
+                            handleChange = {props.onChangeType}
+                            inactive={props.inactiveStatus}
+                        />
+    return <div className="row-select">
+                <span className="title">Тип кнопок: </span>
+                    {selectType}
+            </div>
 
-    }
 
 }
 
@@ -186,8 +161,7 @@ export class ButtonView extends React.Component {
             {value: 'ReplyKeyboard', text:'ReplyKeyboard'},
             {value: 'InlineKeyboard', text:'InlineKeyboard'}
         ];
-        console.log(this.state.typeButtons);
-        const buttonField = (this.state.typeButtons == 'ReplyKeyboard')
+        const buttonField = (this.state.typeButtons === 'ReplyKeyboard')
             ? <div>
                 <ButtonField
                     typeButtons={this.state.typeButtons}
