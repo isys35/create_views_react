@@ -31,10 +31,16 @@ export class SelectWithSettings extends React.Component {
 
     handleChange() {
         this.setState({action: 'change'});
+        if (this.props.onEditStatus) {
+            this.props.onEditStatus();
+        }
     }
 
     handleCancelChange() {
         this.setState({action: 'select'});
+        if (this.props.onSelectStatus) {
+            this.props.onSelectStatus();
+        }
     }
 
     render() {

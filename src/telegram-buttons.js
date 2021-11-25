@@ -85,89 +85,38 @@ class ButtonField extends React.Component {
 }
 
 
-// class ButtonCreater extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {text: '', type: 'ReplyKeyboard', mode: 'create'};
-//         this.handleChange = this.handleChange.bind(this);
-//         this.handleChangeType = this.handleChangeType.bind(this);
-//         this.saveButton = this.saveButton.bind(this);
-//         this.setSelectMode = this.setSelectMode.bind(this);
-//         this.setCreateMode = this.setCreateMode.bind(this);
-//     }
-//
-//
-//     handleChange(event) {
-//         this.setState({text: event.target.value});
-//     }
-//
-//     handleChangeType(event) {
-//         this.setState({type: event.target.value});
-//     }
-//
-//     setSelectMode() {
-//         this.setState({mode: 'select'});
-//     }
-//
-//     setCreateMode() {
-//         this.setState({mode: 'create'});
-//     }
-//
-//
-//     saveButton() {
-//         const url = (this.props.typeButtons === 'ReplyKeyboard') ? `${HOST}replybuttons` :  `${HOST}inlinebuttons`;
-//          fetch(url,
-//             {
-//                 method: 'POST',
-//                 body: JSON.stringify({
-//                     value: this.state.text
-//                     }),
-//                 headers: {"Content-type": "application/json; charset=UTF-8"}})
-//             .then(async res => {
-//                 let result = await res.json();
-//                 if (!res.ok) {
-//                     console.log(result.detail);
-//                 } else {
-//                     this.props.addButton(this.state.text);
-//                     this.props.cancelCreate();
-//                 }
-//             })
-//     }
-//
-//
-//     render() {
-//         const inputBlock = (this.state.mode === 'create') ? <input onChange={this.handleChange} type="text" value={this.state.text}/> : <button></button>
-//         const changeModeBlock = (this.state.mode === 'create') ? <button onClick={this.setSelectMode}>🔎</button> : <button onClick={this.setCreateMode}>✏️</button>
-//         return (
-//             <div className="button-creator">
-//                 <Button btnText={this.state.text}/>
-//                 {inputBlock}
-//                 <button onClick={this.saveButton}>💾</button>
-//                 <button onClick={this.props.cancelCreate}>❌</button>
-//                 {changeModeBlock}
-//             </div>
-//     )
-//     }
-//
-// }
+function ButtonSelectWithSettings(props) {
+    return <SelectWithSettings
+                mainTitle="Выберите кнопку"
+                changeTitle="Редактировать кнопки"
+                changeTextTitle="Изменить текст кнопки"
+                createTitle="Создать кнопку"
+                deleteTitle="Удалить кнопку"
+                restURLpath="replybuttons"
+                onEditStatus={props.onEditStatus}
+                onSelectStatus={props.onEditStatus}
+           />
+}
 
 
 class ButtonCreater extends React.Component {
     constructor(props) {
         super(props);
         this.state = {status: 'select'};
+        this.changeStatus = this.changeStatus.bind(this);
     }
 
+    changeStatus() {
+        this.setState(
+            {status: (this.state.status == "select") ? "edit" : "select"}
+        )
+    }
 
     render() {
         const selectButton = (this.state.status === 'select') ? <div className="create-button-field">
-                                                                    <SelectWithSettings
-                                                                        mainTitle="Выберите кнопку"
-                                                                        changeTitle="Редактировать кнопки"
-                                                                        changeTextTitle="Изменить текст кнопки"
-                                                                        createTitle="Создать кнопку"
-                                                                        deleteTitle="Удалить кнопку"
-                                                                        restURLpath="replybuttons"
+                                                                    <ButtonSelectWithSettings
+                                                                        onEditStatus={this.changeStatus}
+                                                                        onSelectStatus={this.changeStatus}
                                                                     />
                                                                     <div className="row-select">
                                                                         <div>
@@ -179,13 +128,9 @@ class ButtonCreater extends React.Component {
                                                                     </div>
                                                                 </div>
                                                               :  <div className="create-button-field">
-                                                                    <SelectWithSettings
-                                                                        mainTitle="Выберите кнопку"
-                                                                        changeTitle="Редактировать кнопки"
-                                                                        changeTextTitle="Изменить текст кнопки"
-                                                                        createTitle="Создать кнопку"
-                                                                        deleteTitle="Удалить кнопку"
-                                                                        restURLpath="replybuttons"
+                                                                    <ButtonSelectWithSettings
+                                                                        onEditStatus={this.changeStatus}
+                                                                        onSelectStatus={this.changeStatus}
                                                                     />
                                                                 </div>
         return selectButton
