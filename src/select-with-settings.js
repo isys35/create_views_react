@@ -151,37 +151,47 @@ class Options extends React.Component {
         this.props.setSelectedId(value);
     }
 
+    updateOptions(data) {
+        let selectedId = data[0].id;
+        let selectedText = data[0].value;
+        if (this.props.id) {
+            selectedId = this.props.id;
+            for (let i = 0; i < data.length; i++) {
+                if (selectedId == data[i].id) {
+                    selectedText = data[i].value;
+                    break;
+                }
+            }
+        }
+        this.props.setSelectedId(selectedId);
+        this.setState({
+            options: data.map((item) => { return {text: item.value, value: item.id} }),
+            selectedId: selectedId,
+            selectedText: selectedText,
+            isLoaded: true
+        });
+    }
+
     componentDidMount() {
         fetch(HOST + this.props.restURLpath)
-            .then(res => res.json())
-                .then(
-                    (result) => {
-                        if (result.length !== 0) {
-                            let selectedId = result[0].id;
-                            let selectedText = result[0].value;
-                            if (this.props.id) {
-                                selectedId = this.props.id;
-                                for (let i = 0; i < result.length; i++) {
-                                    if (selectedId == result[i].id) {
-                                        selectedText = result[i].value;
-                                        break
-                                    }
-                                }
-                            }
-                            this.props.setSelectedId(selectedId);
-                            this.setState({
-                                options: result.map((item) => { return {text: item.value, value: item.id} }),
-                                selectedId: selectedId,
-                                selectedText: selectedText,
-                                isLoaded: true
-                            });
-                        } else {
-                            console.log(result);
-                          }
+            .then(
+                (response) => {
+                    if (response.status !== 200) {
+                        console.log("Request problem with status code" + response.status);
+                        return
+                    }
+                    response.json().then(
+                        (data) => {
+                            this.updateOptions(data);
                         }
                     )
-
-
+                }
+            )
+            .catch(
+                (error) => {
+                    console.log("Error: ", error);
+                }
+            )
     }
 
     render() {
@@ -236,16 +246,28 @@ class Delete extends React.Component {
         this.handleDelete = this.handleDelete.bind(this);
     }
 
-    componentDidMount() {
-        const url = `${HOST}${this.props.restURLpath}/${this.props.id}`
-        fetch(url)
-            .then(res => res.json())
+        componentDidMount() {
+            fetch(`${HOST}${this.props.restURLpath}/${this.props.id}`)
                 .then(
-                    (result) => {
-                        this.setState({name: result.value});
+                    (response) => {
+                        if (response.status !== 200) {
+                            console.log("Request problem with status code" + response.status);
+                            return
                         }
-                    )
+                        response.json().then(
+                            (data) => {
+                                this.setState({name: data.value});
+                            }
+                        )
+                    }
+                )
+                .catch(
+                    (error) => {
+                        console.log("Error: ", error);
+                    }
+                )
     }
+
 
     handleDelete() {
         const url = `${HOST}${this.props.restURLpath}/${this.props.id}`;

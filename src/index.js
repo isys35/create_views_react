@@ -8,7 +8,6 @@ import { SaveButton } from './action-buttons'
 import { ButtonView } from  './telegram-buttons'
 import { SelectWithSettings } from './select-with-settings'
 
-
 const executionConditions = [
     {text:"команда", value:'command-trigger'},
     {text:"представление", value:'view-trigger'},
