@@ -1,6 +1,8 @@
 import React from 'react';
 import { Select } from './select.js';
 import { SelectWithSettings } from './select-with-settings';
+import { ConfirmTextButton,
+         CancelTextButton } from './action-buttons';
 
 
 function AddButton(props) {
@@ -98,13 +100,9 @@ class ButtonCreater extends React.Component {
                                                                         onEditStatus={this.changeStatus}
                                                                         onSelectStatus={this.changeStatus}
                                                                     />
-                                                                    <div className="row-select">
-                                                                        <div>
-                                                                            Подтвердить
-                                                                        </div>
-                                                                        <div onClick={this.props.cancelCreate}>
-                                                                            Отменить
-                                                                        </div>
+                                                                    <div className="row-select accept-select-button">
+                                                                        <ConfirmTextButton />
+                                                                        <CancelTextButton onClick={this.props.cancelCreate}/>
                                                                     </div>
                                                                 </div>
                                                               :  <div className="create-button-field">

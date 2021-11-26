@@ -1,0 +1,23 @@
+.confirm-text-button, .сancel-text-button {
+    display: inline-block;
+    padding: 10px;
+    background-color: #68bf68;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.4s;
+    cursor: pointer;
+    min-width: 180px;
+}
+
+.сancel-text-button {
+    background-color: #bb6666;
+}
+
+
+.confirm-text-button:hover {
+    background-color: #2aa52a;
+}
+
+.сancel-text-button:hover {
+    background-color: #a34545;
+}

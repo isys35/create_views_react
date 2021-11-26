@@ -1,4 +1,4 @@
-
+import './action-buttons.css';
 
 export function SettingsButton(props) {
     return <div className="settings-icon" onClick={props.onClick}>
@@ -89,6 +89,15 @@ export function ConfirmButton(props) {
                 </svg>
             </div>
 }
+
+export function ConfirmTextButton(props) {
+    return <div className="confirm-text-button">Подтвердить</div>
+}
+
+export function CancelTextButton(props) {
+    return <div className="сancel-text-button" onClick={props.onClick}>Отменить</div>
+}
+
 
 
 

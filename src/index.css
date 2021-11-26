@@ -236,3 +236,12 @@ input:focus {
 .create-button-field .title {
     min-width: 100px;
 }
+
+.confirm-text-button {
+    margin-right: 10px;
+}
+
+.accept-select-button {
+    margin-top: 25px;
+    justify-content: center;
+}
