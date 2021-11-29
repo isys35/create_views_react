@@ -26,6 +26,9 @@ export class SelectWithSettings extends React.Component {
                 selectedId: id,
             }
         );
+        if (this.props.onSelectedId) {
+            this.props.onSelectedId(id);
+        }
     }
 
     handleChange() {

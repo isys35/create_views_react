@@ -43,6 +43,7 @@ class ButtonField extends React.Component {
         this.setState({
             buttons: [...this.state.buttons, text]
         });
+        this.cancelCreate();
     }
 
     cancelCreate() {
@@ -77,6 +78,7 @@ function ButtonSelectWithSettings(props) {
                 restURLpath="replybuttons"
                 onEditStatus={props.onEditStatus}
                 onSelectStatus={props.onEditStatus}
+                onSelectedId={props.onSelectedId}
            />
 }
 
@@ -84,8 +86,9 @@ function ButtonSelectWithSettings(props) {
 class ButtonCreater extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {status: 'select'};
+        this.state = {status: 'select', selectedId: null};
         this.changeStatus = this.changeStatus.bind(this);
+        this.changeSelectedId = this.changeSelectedId.bind(this);
     }
 
     changeStatus() {
@@ -93,12 +96,21 @@ class ButtonCreater extends React.Component {
             {status: (this.state.status === "select") ? "edit" : "select"}
         )
     }
+    
+    changeSelectedId(id) {
+        this.setState(
+            {selectedId: id}
+        );
+
+    }
+    
 
     render() {
         const selectButton = (this.state.status === 'select') ? <div className="create-button-field">
                                                                     <ButtonSelectWithSettings
                                                                         onEditStatus={this.changeStatus}
                                                                         onSelectStatus={this.changeStatus}
+                                                                        onSelectedId={this.changeSelectedId}
                                                                     />
                                                                     <div className="row-select accept-select-button">
                                                                         <ConfirmTextButton />
