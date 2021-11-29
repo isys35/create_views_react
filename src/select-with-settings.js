@@ -54,6 +54,7 @@ export class SelectWithSettings extends React.Component {
                 restURLpath={this.props.restURLpath}
                 changeTextTitle={this.props.changeTextTitle}
                 changeTitle={this.props.changeTitle}
+                createTitle={this.props.createTitle}
                 deleteTitle={this.props.deleteTitle}
                 handleCancelChange={this.handleCancelChange}
                 handleDelete={this.handleDelete}
@@ -136,6 +137,7 @@ class ChangeMenu extends React.Component {
             case 'add':
                 return <Add
                             restURLpath={this.props.restURLpath}
+                            createTitle={this.props.createTitle}
                             handleCancel={this.handleCancel}
                         />
             default:
@@ -399,7 +401,7 @@ class Add extends React.Component {
     render() {
         return (
             <div className="row-select">
-                <span className="title">Создать комманду:</span>
+                <span className="title">{this.props.createTitle}</span>
                 <div className="command-field">
                     <input type="text" value={this.state.name} onChange={this.handleChange}/>
                 </div>
