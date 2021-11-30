@@ -46,7 +46,7 @@ export class Select extends React.Component {
 
     render() {
         const selectItems = (this.props.items === undefined) ? null : this.props.items.map(
-                            (item) => <SelectItem className="select__item" value={item.value} text={item.text} handleSelect={this.handleSelect}/>
+                            (item) => <SelectItem key={item.value} className="select__item" value={item.value} text={item.text} handleSelect={this.handleSelect}/>
                         );
         return (
             <div className={(this.props.inactive) ? "select inactive" : "select"} onClick={this.handleClick}>
