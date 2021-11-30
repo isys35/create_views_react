@@ -91,7 +91,7 @@ export function ConfirmButton(props) {
 }
 
 export function ConfirmTextButton(props) {
-    return <div className="confirm-text-button">Подтвердить</div>
+    return <div className="confirm-text-button" onClick={props.onClick}>Подтвердить</div>
 }
 
 export function CancelTextButton(props) {

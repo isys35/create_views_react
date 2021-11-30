@@ -39,9 +39,9 @@ class ButtonField extends React.Component {
         this.props.changeWithButtonsStatus();
     }
 
-    addButton(text) {
+    addButton(id) {
         this.setState({
-            buttons: [...this.state.buttons, text]
+            buttons: [...this.state.buttons, id]
         });
         this.cancelCreate();
     }
@@ -89,6 +89,7 @@ class ButtonCreater extends React.Component {
         this.state = {status: 'select', selectedId: null};
         this.changeStatus = this.changeStatus.bind(this);
         this.changeSelectedId = this.changeSelectedId.bind(this);
+        this.confirmCreateButton = this.confirmCreateButton.bind(this);
     }
 
     changeStatus() {
@@ -103,6 +104,10 @@ class ButtonCreater extends React.Component {
         );
 
     }
+
+    confirmCreateButton() {
+        this.props.addButton(this.state.selectedId);
+    }
     
 
     render() {
@@ -113,7 +118,7 @@ class ButtonCreater extends React.Component {
                                                                         onSelectedId={this.changeSelectedId}
                                                                     />
                                                                     <div className="row-select accept-select-button">
-                                                                        <ConfirmTextButton />
+                                                                        <ConfirmTextButton onClick={this.confirmCreateButton}/>
                                                                         <CancelTextButton onClick={this.props.cancelCreate}/>
                                                                     </div>
                                                                 </div>
