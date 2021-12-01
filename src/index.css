@@ -245,3 +245,11 @@ input:focus {
     margin-top: 25px;
     justify-content: center;
 }
+
+.replybutton {
+    color: black;
+    background-color: white;
+    box-shadow: none;
+    border: solid 1px var(--grey-color);
+    margin-top: 0px;
+}

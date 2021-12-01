@@ -10,15 +10,22 @@ function AddButton(props) {
 }
 
 
-function Button(props) {
-    return (<div>
-                <button className="tgbutton" disabled="disabled">{props.btnText}</button>
-            </div>)
+// function Button(props) {
+//     return <button className="tgbutton" disabled="disabled">{props.btnText}</button>
+// }
+
+class Button extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return <div className="tgbutton replybutton">{this.props.btnText}</div>
+    }
 }
 
 function  ButtonFieldView(props) {
         let buttons = props.buttons.map((button) => <Button btnText={button}/>);
-        return (<div>
+        return (<div className="buttons-field">
                     {buttons}
                 </div>)
 }
