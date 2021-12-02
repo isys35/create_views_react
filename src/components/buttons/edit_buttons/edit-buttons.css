@@ -21,3 +21,66 @@
 .сancel-text-button:hover {
     background-color: #a34545;
 }
+
+.settings-icon {
+    display: inline-block;
+    fill: var(--grey-color);
+    padding: 5px;
+    width: 50px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.command-field {
+    display: flex;
+    flex-direction: row;
+}
+
+.command-field .select, .command-field input {
+    margin-right: 20px;
+}
+
+.cancel-button,
+.edit-button,
+.add-button,
+.delete-button,
+.confirm-button {
+    display: inline-block;
+    fill: var(--grey-color);
+    margin-top: 5px;
+    padding: 5px;
+    width: 35px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.save-button {
+    display: inline-block;
+    width: 35px;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.settings-icon:hover,
+.edit-button:hover,
+.save-button:hover,
+.add-button:hover,
+.confirm-button:hover {
+    fill: var(--green-color);
+}
+
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.cancel-button:hover, .delete-button:hover {
+    fill: #a53e3e;
+}
+
+.buttons .confirm-button {
+    margin-top: 7px;
+}

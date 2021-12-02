@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Select } from './select.js';
 import { SaveButton } from './components/buttons/edit_buttons/edit-buttons'
-import { ButtonView } from  './telegram-buttons'
+import { ButtonView } from  './components/buttons/tg_buttons/telegram-buttons'
 import { SelectWithSettings } from './select-with-settings'
 
 const executionConditions = [
@@ -92,6 +92,6 @@ class CreateViewMain extends React.Component {
 
 
 ReactDOM.render(
-  <CreateViewMain executionConditions={executionConditions} />,
+  <ButtonView />,
   document.getElementById('root')
 );

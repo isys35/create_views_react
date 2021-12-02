@@ -45,211 +45,141 @@ body {
     background-color: aliceblue;
 }
 
-h1 {
-  text-align: center;
-  font-weight: 700;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
+/*h1 {*/
+/*  text-align: center;*/
+/*  font-weight: 700;*/
+/*  padding-top: 20px;*/
+/*  padding-bottom: 20px;*/
+/*}*/
 
-.create-view {
-  max-width: 600px;
-  margin: auto;
-}
+/*.create-view {*/
+/*  max-width: 600px;*/
+/*  margin: auto;*/
+/*}*/
 
-.row-select {
-  display: flex;
-}
+/*.row-select {*/
+/*  display: flex;*/
+/*}*/
 
-.title {
+/*.title {*/
 
-  font-weight: 700;
-  display: inline-block;
-  padding: 12px;
-  min-width: 200px;
-}
+/*  font-weight: 700;*/
+/*  display: inline-block;*/
+/*  padding: 12px;*/
+/*  min-width: 200px;*/
+/*}*/
 
-.form-control {
-    padding: 7px 9px 6px;
-    font-size: 14px;
-    border: 2px solid #e3e8ee;
-    border-radius: 8px;
-    color: #444;
-    white-space: pre-wrap;
-    appearance: none;
-}
+/*.form-control {*/
+/*    padding: 7px 9px 6px;*/
+/*    font-size: 14px;*/
+/*    border: 2px solid #e3e8ee;*/
+/*    border-radius: 8px;*/
+/*    color: #444;*/
+/*    white-space: pre-wrap;*/
+/*    appearance: none;*/
+/*}*/
 
-textarea {
-  width: 100%;
-  resize: none;
-}
+/*textarea {*/
+/*  width: 100%;*/
+/*  resize: none;*/
+/*}*/
 
-.button-view {
-  height: 40px;
-  text-align: center;
-}
+/*.button-view {*/
+/*  height: 40px;*/
+/*  text-align: center;*/
+/*}*/
 
 
-.save-button svg {
-    fill: var(--grey-color);
-    transition: 0.4s;
-}
+/*.save-button svg {*/
+/*    fill: var(--grey-color);*/
+/*    transition: 0.4s;*/
+/*}*/
 
-.save-button svg:hover {
-    fill: var(--green-color);
-}
+/*.save-button svg:hover {*/
+/*    fill: var(--green-color);*/
+/*}*/
 
-.save-button svg {
-    width: 100%;
-    height: 100%;
-}
+/*.save-button svg {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
 
-.row-save-button {
-    display: flex;
-    justify-content: right;
-}
+/*.row-save-button {*/
+/*    display: flex;*/
+/*    justify-content: right;*/
+/*}*/
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.tgbutton {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  padding: 12px;
-  margin: 12px;
-  border-radius: 8px;
-  color: var(--grey-color);
-}
+/*code {*/
+/*  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',*/
+/*    monospace;*/
+/*}*/
 
 
 
-.button-creator{
-  width: 100%;
-}
-
-.load {
-    padding: 12px;
-}
-
-.textview-input {
-    font-family: 'MoseoSansCyrl';
-    font-weight: 500;
-    margin: 12px;
-    padding: 12px;
-    border-radius: 8px;
-    background-color: aliceblue;
-}
-
-input {
-    display: block;
-    font-family: 'MoseoSansCyrl';
-    padding: 12px;
-    border-radius: 8px;
-    border-color: grey;
-    border-style: solid;
-    transition: 0.4s;
-}
-
-input:focus {
-    border-color: black;
-}
-
-.settings-icon {
-    display: inline-block;
-    fill: var(--grey-color);
-    padding: 5px;
-    width: 50px;
-    cursor: pointer;
-    transition: 0.4s;
-}
-
-.cancel-button,
-.edit-button,
-.add-button,
-.delete-button,
-.confirm-button {
-    display: inline-block;
-    fill: var(--grey-color);
-    margin-top: 5px;
-    padding: 5px;
-    width: 35px;
-    cursor: pointer;
-    transition: 0.4s;
-}
-
-.save-button {
-    display: inline-block;
-    width: 35px;
-    padding: 5px;
-    cursor: pointer;
-    transition: 0.4s;
-}
 
 
-.buttons {
-    display: flex;
-    flex-direction: row;
-}
+/*.button-creator{*/
+/*  width: 100%;*/
+/*}*/
+
+/*.load {*/
+/*    padding: 12px;*/
+/*}*/
+
+/*.textview-input {*/
+/*    font-family: 'MoseoSansCyrl';*/
+/*    font-weight: 500;*/
+/*    margin: 12px;*/
+/*    padding: 12px;*/
+/*    border-radius: 8px;*/
+/*    background-color: aliceblue;*/
+/*}*/
+
+/*input {*/
+/*    display: block;*/
+/*    font-family: 'MoseoSansCyrl';*/
+/*    padding: 12px;*/
+/*    border-radius: 8px;*/
+/*    border-color: grey;*/
+/*    border-style: solid;*/
+/*    transition: 0.4s;*/
+/*}*/
+
+/*input:focus {*/
+/*    border-color: black;*/
+/*}*/
 
 
-.settings-icon:hover,
-.edit-button:hover,
-.save-button:hover,
-.add-button:hover,
-.confirm-button:hover {
-    fill: var(--green-color);
-}
 
 
-.cancel-button:hover, .delete-button:hover {
-    fill: #a53e3e;
-}
-
-.buttons .confirm-button {
-    margin-top: 7px;
-}
 
 
-.command-field {
-    display: flex;
-    flex-direction: row;
 
-}
 
-.command-field .select, .command-field input {
-    margin-right: 20px;
-}
 
-.create-button-field {
-    display: inline-block;
-    width: 100%;
-    padding: 25px;
-    border: solid var(--grey-color);
-    border-radius: 15px;
-}
 
-.create-button-field .title {
-    min-width: 100px;
-}
 
-.confirm-text-button {
-    margin-right: 10px;
-}
 
-.accept-select-button {
-    margin-top: 25px;
-    justify-content: center;
-}
 
-.replybutton {
-    color: black;
-    background-color: white;
-    box-shadow: none;
-    border: solid 1px var(--grey-color);
-    margin-top: 0px;
-}
+
+
+/*.create-button-field .title {*/
+/*    min-width: 100px;*/
+/*}*/
+
+/*.confirm-text-button {*/
+/*    margin-right: 10px;*/
+/*}*/
+
+/*.accept-select-button {*/
+/*    margin-top: 25px;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.replybutton {*/
+/*    color: black;*/
+/*    background-color: white;*/
+/*    box-shadow: none;*/
+/*    border: solid 1px var(--grey-color);*/
+/*    margin-top: 0px;*/
+/*}*/

@@ -1,0 +1,31 @@
+.row-select {
+  display: flex;
+}
+.title {
+  font-weight: 700;
+  display: inline-block;
+  padding: 12px;
+  min-width: 200px;
+}
+
+.tgbutton {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: inline-block;
+  max-width: 588px;
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  margin: 12px;
+  border-radius: 8px;
+  color: var(--grey-color);
+}
+
+.create-button-field {
+    display: inline-block;
+    width: 100%;
+    max-width: 588px;
+    padding: 25px;
+    border: solid var(--grey-color);
+    border-radius: 15px;
+}
