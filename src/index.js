@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { Select } from './select.js';
-import { SaveButton } from './action-buttons'
+import { SaveButton } from './components/buttons/edit_buttons/edit-buttons'
 import { ButtonView } from  './telegram-buttons'
 import { SelectWithSettings } from './select-with-settings'
 

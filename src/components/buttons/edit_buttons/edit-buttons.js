@@ -1,4 +1,4 @@
-import './action-buttons.css';
+import './edit-buttons.css';
 
 export function SettingsButton(props) {
     return <div className="settings-icon" onClick={props.onClick}>

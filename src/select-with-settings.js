@@ -6,7 +6,7 @@ import { SettingsButton,
     SaveButton,
     AddButton,
     DeleteButton,
-    ConfirmButton } from './action-buttons';
+    ConfirmButton } from './components/buttons/edit_buttons/edit-buttons';
 import { Select } from './select';
 import { Load } from './load';
 
