@@ -1,14 +1,14 @@
 import React from 'react';
-import { HOST } from './settings';
+import { HOST } from '../../settings';
 import { SettingsButton,
     EditButton,
     CancelButton,
     SaveButton,
     AddButton,
     DeleteButton,
-    ConfirmButton } from './components/buttons/edit_buttons/edit-buttons';
-import { Select } from './select';
-import { Load } from './load';
+    ConfirmButton } from '../buttons/edit_buttons/edit-buttons';
+import { Select } from './select/select';
+import { Load } from '../../load';
 
 
 export class SelectWithSettings extends React.Component {

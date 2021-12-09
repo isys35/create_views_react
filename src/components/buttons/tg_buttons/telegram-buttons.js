@@ -1,7 +1,7 @@
 import './tg-buttons.css';
 import React from 'react';
-import { Select } from '../../../select.js';
-import { SelectWithSettings } from '../../../select-with-settings';
+import { Select } from '../../selects/select/select.js';
+import { SelectWithSettings } from '../../selects/select-with-settings';
 import { ConfirmTextButton,
          CancelTextButton } from '../edit_buttons/edit-buttons';
 
