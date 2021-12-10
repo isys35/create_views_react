@@ -4,6 +4,7 @@ import './index.css';
 import { SaveButton } from './components/buttons/edit_buttons/edit-buttons';
 import { CancelButton } from './components/buttons/edit_buttons/edit-buttons';
 import { ButtonView } from  './components/buttons/tg_buttons/telegram-buttons';
+import { TextView } from './components/text-view'
 import { SelectTrigger } from  './components/trigger';
 import { Trigger } from  './components/trigger';
 
@@ -11,16 +12,6 @@ const executionConditions = [
     {text:"команда", value:'command-trigger'},
     {text:"представление", value:'view-trigger'},
 ]
-
-
-
-function TextView(props) {
-    return (
-        <div>
-            <textarea className="textview-input"></textarea>
-        </div>
-    )
-}
 
 
 

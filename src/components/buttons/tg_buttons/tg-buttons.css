@@ -5,7 +5,7 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   display: inline-block;
-  max-width: 588px;
+  max-width: 635px;
   width: 100%;
   text-align: center;
   padding: 12px;
@@ -17,7 +17,7 @@
 .create-button-field {
     display: inline-block;
     width: 100%;
-    max-width: 588px;
+    max-width: 640px;
     padding: 25px;
     border: solid var(--grey-color);
     border-radius: 15px;

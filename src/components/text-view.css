@@ -1,0 +1,20 @@
+.textview-input {
+    display: block;
+    font-family: 'MoseoSansCyrl';
+    padding: 12px;
+    border-radius: 8px;
+    border-color: grey;
+    border-style: solid;
+    transition: 0.4s;
+    width: 350px;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.textview-input:focus {
+    border-color: black;
+}
+
+.textview {
+    display: flex;
+}

@@ -9,7 +9,7 @@ import { SettingsButton,
     DeleteButton,
     ConfirmButton } from '../buttons/edit_buttons/edit-buttons';
 import { Select } from './select/select';
-import { Load } from '../../load';
+import { Load } from '../load/load';
 
 
 export class SelectWithSettings extends React.Component {
@@ -165,6 +165,9 @@ class Options extends React.Component {
     }
 
     updateOptions(data) {
+        if (data.length == 0) {
+            return
+        }
         let selectedId = data[0].id;
         let selectedText = data[0].value;
         if (this.props.id) {
