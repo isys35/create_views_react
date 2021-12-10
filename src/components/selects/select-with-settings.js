@@ -1,4 +1,5 @@
 import React from 'react';
+import './select-wirh-settings.css';
 import { HOST } from '../../settings';
 import { SettingsButton,
     EditButton,

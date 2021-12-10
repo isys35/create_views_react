@@ -54,14 +54,19 @@
     transition: 0.4s;
 }
 
-.save-button {
+.save-button svg{
     display: inline-block;
+    fill: var(--grey-color);
     width: 35px;
     padding: 5px;
+    height: 100%;
     cursor: pointer;
     transition: 0.4s;
 }
 
+.save-button svg:hover{
+    fill: var(--green-color);
+}
 .settings-icon:hover,
 .edit-button:hover,
 .save-button:hover,

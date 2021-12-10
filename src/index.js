@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { SaveButton } from './components/buttons/edit_buttons/edit-buttons'
-import { ButtonView } from  './components/buttons/tg_buttons/telegram-buttons'
-import { SelectTrigger } from  './components/trigger'
-import { Trigger } from  './components/trigger'
+import { SaveButton } from './components/buttons/edit_buttons/edit-buttons';
+import { CancelButton } from './components/buttons/edit_buttons/edit-buttons';
+import { ButtonView } from  './components/buttons/tg_buttons/telegram-buttons';
+import { SelectTrigger } from  './components/trigger';
+import { Trigger } from  './components/trigger';
 
 const executionConditions = [
     {text:"команда", value:'command-trigger'},
