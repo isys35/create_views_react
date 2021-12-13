@@ -28,12 +28,21 @@ export class Select extends React.Component {
         this.handleSelect = this.handleSelect.bind(this);
     }
 
+
     handleClick() {
         if (!this.props.inactive) {
+            if (!this.state.opened) {
+                document.addEventListener("click", this.handleOutsideClick, false);
+            } else {
+                document.removeEventListener("click", this.handleOutsideClick, false);
+            }
             this.setState({opened: !this.state.opened});
         }
-
     }
+
+    handleOutsideClick = e => {
+      if (!this.node.contains(e.target)) this.handleClick();
+    };
 
     handleSelect(value, text) {
         if (!this.props.inactive) {
@@ -49,7 +58,8 @@ export class Select extends React.Component {
                             (item) => <SelectItem key={item.value} className="select__item" value={item.value} text={item.text} handleSelect={this.handleSelect}/>
                         );
         return (
-            <div className={(this.props.inactive) ? "select inactive" : "select"} onClick={this.handleClick}>
+            <div ref={node => {this.node = node;}} className={(this.props.inactive) ? "select inactive" : "select"}
+                 onClick={this.handleClick}>
                 <input className="select__input" type="hidden"/>
                 <div className={(this.state.opened === false) ? 'select__head' : 'select__head open'}>
                     { (this.state.text == null) ? 'Выберите' : this.state.text }
