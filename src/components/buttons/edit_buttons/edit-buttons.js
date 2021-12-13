@@ -98,6 +98,10 @@ export function CancelTextButton(props) {
     return <div className="сancel-text-button" onClick={props.onClick}>Отменить</div>
 }
 
+export function MainSaveButton(props) {
+    return <div className="main-save-button">Создать шаг</div>
+}
+
 
 
 

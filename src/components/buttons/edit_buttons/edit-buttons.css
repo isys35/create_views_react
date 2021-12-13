@@ -89,3 +89,23 @@
 .buttons .confirm-button {
     margin-top: 7px;
 }
+
+.row-save-button{
+    display: flex;
+}
+
+.main-save-button {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    width: 450px;
+    background-color: #2aad2a;
+    border-radius: 5px;
+    transition: 0.4s;
+}
+
+.main-save-button:hover {
+    background-color: #2fa32f;
+}

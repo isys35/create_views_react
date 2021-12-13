@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { SaveButton } from './components/buttons/edit_buttons/edit-buttons';
+import { MainSaveButton } from './components/buttons/edit_buttons/edit-buttons';
 import { CancelButton } from './components/buttons/edit_buttons/edit-buttons';
 import { ButtonView } from  './components/buttons/tg_buttons/telegram-buttons';
 import { TextView } from './components/text-view'
@@ -40,7 +40,7 @@ class CreateViewMain extends React.Component {
                     <TextView />
                     <ButtonView />
                     <div className="row-save-button">
-                        <SaveButton />
+                        <MainSaveButton />
                     </div>
                 </div>
             </div>);
