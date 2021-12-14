@@ -42,9 +42,16 @@ class CreateViewMain extends React.Component {
     setInputedText(text) {
         this.setState({text: text});
     }
+    
+    addButton(id) {
+        this.setState({
+            buttons: [...this.state.buttons, id]
+        });
+    }
 
     render() {
         const executionConditions = this.props.executionConditions;
+        console.log(this.state.buttons);
         return (
             <div className="container">
                 <h1>Cоздание шага</h1>
@@ -52,7 +59,7 @@ class CreateViewMain extends React.Component {
                     <SelectTrigger executionConditions={executionConditions} handleChange={this.handleChange} />
                     <Trigger trigger={this.state.trigger} setSelectedCommand={this.setSelectedCommand}/>
                     <TextView setInputedText={this.setInputedText} />
-                    <ButtonView />
+                    <ButtonView addButton={this.addButton}/>
                     <div className="row-save-button">
                         <MainSaveButton />
                     </div>

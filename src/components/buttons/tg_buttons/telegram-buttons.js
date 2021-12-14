@@ -51,6 +51,7 @@ class ButtonField extends React.Component {
         this.setState({
             buttons: [...this.state.buttons, id]
         });
+        this.props.addButton(id);
         this.cancelCreate();
     }
 
