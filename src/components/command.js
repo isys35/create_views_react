@@ -8,5 +8,6 @@ export function SelectCommand(props){
                 createTitle="Создать комманду"
                 deleteTitle="Удалить комманду"
                 restURLpath = "commands"
+                onSelectedId={props.setSelectedCommand}
             />
 }

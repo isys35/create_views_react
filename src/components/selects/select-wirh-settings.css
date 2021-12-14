@@ -1,3 +1,7 @@
 .row-select {
     display: flex;
 }
+
+.input-command {
+    margin-bottom: 20px;
+}

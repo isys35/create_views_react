@@ -29,7 +29,7 @@ export function SelectTrigger(props) {
 
 export function Trigger(props) {
     const trigger = props.trigger
-    const component = (trigger === 'command-trigger') ?   <SelectCommand />
+    const component = (trigger === 'command-trigger') ?   <SelectCommand setSelectedCommand={props.setSelectedCommand}/>
                                                        :   <ViewTrigger />
     return component
 }

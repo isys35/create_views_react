@@ -360,7 +360,7 @@ class Edit extends React.Component {
             <div className="row-select">
                 <span className="title">{this.props.changeTextTitle}:</span>
                 <div className="command-field">
-                    <input type="text" value={this.state.name} onChange={this.handleChange}/>
+                    <input className="input-command" type="text" value={this.state.name} onChange={this.handleChange}/>
                 </div>
                 <div className="buttons">
                         <SaveButton onClick={this.handleSaveChange} />
@@ -410,7 +410,7 @@ class Add extends React.Component {
             <div className="row-select">
                 <span className="title">{this.props.createTitle}</span>
                 <div className="command-field">
-                    <input type="text" value={this.state.name} onChange={this.handleChange}/>
+                    <input className="input-command" type="text" value={this.state.name} onChange={this.handleChange}/>
                 </div>
                 <div className="buttons">
                     <SaveButton onClick={this.handleCreate}/>
