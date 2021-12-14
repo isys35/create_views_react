@@ -151,12 +151,34 @@ class ChangeMenu extends React.Component {
 }
 
 
+function ActionButtons(props) {
+    const buttons = (props.optionWithoutElements) ? <div className="buttons">
+                                                        <AddButton onClick={props.handleAdd}/>
+                                                        <CancelButton onClick={props.handleCancelChange}/>
+                                                    </div> :
+                                                    <div className="buttons">
+                                                        <EditButton  onClick={props.handleEdit}/>
+                                                        <AddButton onClick={props.handleAdd}/>
+                                                        <DeleteButton onClick={props.handleDelete}/>
+                                                        <CancelButton onClick={props.handleCancelChange}/>
+                                                    </div>
+    return (
+        buttons
+    )
+}
+
 
 class Options extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {options: [], selectedId: null, selectedText:null, isLoaded: false};
+        this.state = {
+            options: [],
+            selectedId: null,
+            selectedText:null,
+            isLoaded: false,
+            isWithoutElements: false
+        };
         this.handleChangeSelected = this.handleChangeSelected.bind(this);
     }
 
@@ -166,6 +188,7 @@ class Options extends React.Component {
 
     updateOptions(data) {
         if (data.length == 0) {
+            this.setState({isWithoutElements: true, isLoaded:true});
             return
         }
         let selectedId = data[0].id;
@@ -214,19 +237,22 @@ class Options extends React.Component {
         if (this.state.isLoaded) {
             const buttons = (this.props.type === 'select') ?
                 <SettingsButton onClick={this.props.handleChange}/> :
-                <div className="buttons">
-                    <EditButton  onClick={this.props.handleEdit}/>
-                    <AddButton onClick={this.props.handleAdd}/>
-                    <DeleteButton onClick={this.props.handleDelete}/>
-                    <CancelButton onClick={this.props.handleCancelChange}/>
-                </div>;
+                <ActionButtons
+                    handleEdit={this.props.handleEdit}
+                    handleAdd={this.props.handleAdd}
+                    handleDelete={this.props.handleDelete}
+                    handleCancelChange={this.props.handleCancelChange}
+                    optionWithoutElements={this.state.isWithoutElements}
+                />;
+            const select = (!this.state.isWithoutElements) ? <Select items={this.state.options}
+                                                                     text={this.state.selectedText}
+                                                                     value={this.state.selectedId}
+                                                                     handleChange={this.handleChangeSelected} /> :
+                null
             return (<div className="command-field">
-                    <Select items={this.state.options}
-                            text={this.state.selectedText}
-                            value={this.state.selectedId}
-                            handleChange={this.handleChangeSelected} />
-                    {buttons}
-                </div>
+                        {select}
+                        {buttons}
+                    </div>
             )
         } else {
             return (<Load />)
