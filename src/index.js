@@ -28,6 +28,7 @@ class CreateViewMain extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.setSelectedCommand = this.setSelectedCommand.bind(this);
+        this.setInputedText = this.setInputedText.bind(this);
     }
 
     handleChange(value) {
@@ -37,6 +38,10 @@ class CreateViewMain extends React.Component {
     setSelectedCommand(command_id) {
         this.setState({selected_command: command_id});
     };
+    
+    setInputedText(text) {
+        this.setState({text: text});
+    }
 
     render() {
         const executionConditions = this.props.executionConditions;
@@ -46,7 +51,7 @@ class CreateViewMain extends React.Component {
                 <div className="create-view">
                     <SelectTrigger executionConditions={executionConditions} handleChange={this.handleChange} />
                     <Trigger trigger={this.state.trigger} setSelectedCommand={this.setSelectedCommand}/>
-                    <TextView />
+                    <TextView setInputedText={this.setInputedText} />
                     <ButtonView />
                     <div className="row-save-button">
                         <MainSaveButton />
