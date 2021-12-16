@@ -12,9 +12,13 @@ export class TextView extends React.Component {
     }
 
     render() {
+        let classTitle = "title";
+        if (this.props.textError) {
+            classTitle += " error";
+        }
         return (
         <div className="textview">
-            <span className="title">Текст:</span>
+            <span className={classTitle}>Текст:</span>
             <textarea className="textview-input" onChange={this.onChangeHandler}></textarea>
         </div>
         )

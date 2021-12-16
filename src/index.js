@@ -24,11 +24,14 @@ class CreateViewMain extends React.Component {
             trigger: executionConditions[0].value,
             selected_command: null,
             text: null,
+            textError: false,
             buttons: [],
         }
         this.handleChange = this.handleChange.bind(this);
         this.setSelectedCommand = this.setSelectedCommand.bind(this);
         this.setInputedText = this.setInputedText.bind(this);
+        this.addButton = this.addButton.bind(this);
+        this.createStep = this.createStep.bind(this);
     }
 
     handleChange(value) {
@@ -49,6 +52,17 @@ class CreateViewMain extends React.Component {
         });
     }
 
+    validate() {
+        if (!this.state.text) {
+            this.setState({textError: true})
+            return
+        } 
+    }
+
+    createStep() {
+        this.validate();
+    }
+
     render() {
         const executionConditions = this.props.executionConditions;
         console.log(this.state.buttons);
@@ -58,10 +72,10 @@ class CreateViewMain extends React.Component {
                 <div className="create-view">
                     <SelectTrigger executionConditions={executionConditions} handleChange={this.handleChange} />
                     <Trigger trigger={this.state.trigger} setSelectedCommand={this.setSelectedCommand}/>
-                    <TextView setInputedText={this.setInputedText} />
+                    <TextView textError={this.state.textError} setInputedText={this.setInputedText} />
                     <ButtonView addButton={this.addButton}/>
                     <div className="row-save-button">
-                        <MainSaveButton />
+                        <MainSaveButton onClick={this.createStep}/>
                     </div>
                 </div>
             </div>);
