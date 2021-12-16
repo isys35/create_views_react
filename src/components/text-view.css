@@ -15,6 +15,10 @@
     border-color: black;
 }
 
+.text-error {
+    background: rgba(246, 63, 63, 0.31);
+}
+
 .textview {
     display: flex;
 }
