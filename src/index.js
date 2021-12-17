@@ -7,6 +7,7 @@ import { ButtonView } from  './components/buttons/tg_buttons/telegram-buttons';
 import { TextView } from './components/text-view'
 import { SelectTrigger } from  './components/trigger';
 import { Trigger } from  './components/trigger';
+import { HOST } from './settings';
 
 const executionConditions = [
     {text:"команда", value:'command-trigger'},
@@ -23,6 +24,7 @@ class CreateViewMain extends React.Component {
         this.state = {
             trigger: executionConditions[0].value,
             selected_command: null,
+            input_id: null,
             text: null,
             textError: false,
             buttons: [],
@@ -33,14 +35,35 @@ class CreateViewMain extends React.Component {
         this.addButton = this.addButton.bind(this);
         this.createStep = this.createStep.bind(this);
         this.clearTextError = this.clearTextError.bind(this);
+        this.updateInputOnCommandSelect = this.updateInputOnCommandSelect.bind(this);
+    }
+
+    updateInputOnCommandSelect(command_id) {
+        const url = `${HOST}inputs/?type=command&command_id=${command_id}`;
+        fetch(url,
+            {
+                method: 'GET',
+            })
+            .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({input_id: result['id']});
+                        }
+                    )
+
     }
 
     handleChange(value) {
-        this.setState({trigger: value});
+        if (value == 'view-trigger') {
+            this.setState({trigger: value, input_id: null, selected_command: null});
+        } else {
+            this.setState({trigger: value});
+        }
     }
     
     setSelectedCommand(command_id) {
         this.setState({selected_command: command_id});
+        this.updateInputOnCommandSelect(command_id);
     };
     
     setInputedText(text) {
@@ -60,17 +83,21 @@ class CreateViewMain extends React.Component {
     validate() {
         if (!this.state.text) {
             this.setState({textError: true})
-            return
-        } 
+            return false
+        }
+        return true
     }
 
     createStep() {
-        this.validate();
+        if (this.validate()) {
+            console.log(this.state.input_id);
+        }
     }
+
 
     render() {
         const executionConditions = this.props.executionConditions;
-        console.log(this.state.buttons);
+        console.log(this.state.input_id);
         return (
             <div className="container">
                 <h1>Cоздание шага</h1>
