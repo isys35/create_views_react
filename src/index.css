@@ -4,8 +4,12 @@
 }
 
 * {
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
+
+
 
 *::before, *::after {
     box-sizing: border-box;
@@ -45,9 +49,48 @@ body {
     background-color: aliceblue;
 }
 
+.main-menu {
+    width: 320px;
+    min-width: 320px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    left: 0;
+    padding: 15px 20px;
+    background: #dae0e8;
+    box-shadow: 4px 0px 20px 0px rgba(0,0,0, 0.5);
+    z-index: 2000;
+}
+
+.main-menu__list-item {
+    list-style-type: none;
+    display: block;
+}
+
+.main-menu__list-item a {
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    color: black;
+}
+
+.main-menu__list-item:hover {
+    border-bottom: solid 3px black;
+    border-left: solid 1px black;
+}
+
+.main-menu__header {
+    margin-bottom: 15px;
+}
+
 .container {
-    max-width: 1000px;
-    margin: auto;
+    max-width: 1024px;
+    margin: 0 auto;
+    transform: translateX(320px);
 }
 
 h1 {
