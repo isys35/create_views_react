@@ -99,7 +99,7 @@ export function CancelTextButton(props) {
 }
 
 export function MainSaveButton(props) {
-    return <div className="main-save-button" onClick={props.onClick}>Создать шаг</div>
+    return <div className="green-create-btn main-save-button" onClick={props.onClick}>Создать шаг</div>
 }
 
 

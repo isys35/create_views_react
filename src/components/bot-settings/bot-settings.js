@@ -1,4 +1,45 @@
 import React from 'react';
+import './bot-settings.css';
+import {CancelButton, ConfirmButton} from "../buttons/edit_buttons/edit-buttons";
+
+
+class BotCreater extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            step: 'add-btn'
+        }
+        this.toInputDataStep = this.toInputDataStep.bind(this);
+    }
+
+    toInputDataStep() {
+        this.setState({step: 'input-data'});
+    }
+
+    render() {
+        let step;
+        // eslint-disable-next-line default-case
+        switch (this.state.step) {
+            case 'add-btn':
+                step = <div className="green-create-btn create-bot" onClick={this.toInputDataStep}>
+                                Добавить бота
+                            </div>;
+            break;
+            case 'input-data':
+                step = <div className="create-bot input-data">
+                            <input className="input-bot" type="text" placeholder="Введите токен бота"/>
+                            <ConfirmButton/>
+                            <CancelButton/>
+                        </div>;
+            break;
+        }
+        return (
+            <div className="add-bot-block">
+                {step}
+            </div>
+        )
+    }
+}
 
 export class BotSettings extends React.Component {
     constructor(props) {
@@ -6,6 +47,13 @@ export class BotSettings extends React.Component {
     }
 
     render() {
-        return <h1>Настройки ботов</h1>
+        return (
+            <div className="container">
+                <h1>Настройки ботов</h1>
+                <div className="bot-settings">
+                    <BotCreater/>
+                </div>
+            </div>
+            )
     }
 }

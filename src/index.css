@@ -89,8 +89,7 @@ body {
 
 .container {
     max-width: 1024px;
-    margin: 0 auto;
-    transform: translateX(320px);
+    margin:0 auto;
 }
 
 h1 {
@@ -100,7 +99,7 @@ h1 {
   padding-bottom: 20px;
 }
 
-.create-view {
+.create-view, .bot-settings {
     width: 700px;
     margin: auto;
 }
@@ -114,4 +113,12 @@ h1 {
 
 .load {
     padding: 7px;
+}
+
+
+@media (max-width: 1500px) {
+    .container {
+        margin-left: 0;
+        transform: translateX(340px);
+    }
 }

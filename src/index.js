@@ -147,8 +147,8 @@ class App extends React.Component {
             <BrowserRouter>
                 <Menu />
                 <Routes>
-                    <Route path="create-step" element={<CreateViewMain executionConditions={executionConditions}/>}></Route>
-                    <Route path="bot-settings" element={<BotSettings />}></Route>
+                    <Route path="create-step" element={<CreateViewMain executionConditions={executionConditions}/>}/>
+                    <Route path="bot-settings" element={<BotSettings/>}/>
                 </Routes>
             </BrowserRouter>
         )
