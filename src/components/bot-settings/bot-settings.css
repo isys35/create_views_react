@@ -9,6 +9,10 @@
     align-items: center;
 }
 
+.green-create-btn.create-bot {
+    transition: 0s;
+}
+
 .confirm-button {
     margin-right: 6px;
 }

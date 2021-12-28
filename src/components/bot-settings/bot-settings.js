@@ -10,10 +10,16 @@ class BotCreater extends React.Component {
             step: 'add-btn'
         }
         this.toInputDataStep = this.toInputDataStep.bind(this);
+        this.cancelCreate = this.cancelCreate.bind(this);
     }
 
     toInputDataStep() {
         this.setState({step: 'input-data'});
+    }
+
+
+    cancelCreate() {
+        this.setState({step: 'add-btn'});
     }
 
     render() {
@@ -29,7 +35,7 @@ class BotCreater extends React.Component {
                 step = <div className="create-bot input-data">
                             <input className="input-bot" type="text" placeholder="Введите токен бота"/>
                             <ConfirmButton/>
-                            <CancelButton/>
+                            <CancelButton onClick={this.cancelCreate}/>
                         </div>;
             break;
         }
